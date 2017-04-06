@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace TermLibrary
 {
-    class Param
+    public class Param
     {
-        private string paramName;
-        private object paramVal;
-        private SqlDbType paramType;
+        public string paramName;
+        public object paramVal;
+        public SqlDbType paramType;
 
         public Param(string n, object v, SqlDbType t)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using TermLibrary;
 
 namespace TermService
 {
@@ -21,6 +22,12 @@ namespace TermService
         public string HelloWorld()
         {
             return "Hello World";
+        }
+
+        [WebMethod]
+        public bool CreateNewAccount(string[] data)
+        {
+            return LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data);
         }
     }
 }
