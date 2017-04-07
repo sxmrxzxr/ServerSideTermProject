@@ -25,7 +25,7 @@ namespace TermService
         }
 
         [WebMethod]
-        public string CreateNewAccount(string[] data, bool rememberMe)
+        public string CreateNewAccount(object[] data, bool rememberMe)
         {
             // 0 == failure
             int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
@@ -36,8 +36,8 @@ namespace TermService
                 {
                     HttpCookie newCookie = new HttpCookie("userCookie");
                     newCookie.Value = "TermProjectSession";
-                    newCookie.Values["Email"] = data[2];
-                    LoginDB.ExecuteNonQuery("NewAccountSession", LoginDB.BuildNewCookieParams(new string[2] { data[2], newCookie.Value.ToString() }));
+                    newCookie.Values["Email"] = Convert.ToString(data[2]);
+                    LoginDB.ExecuteNonQuery("NewAccountSession", LoginDB.BuildNewCookieParams(new string[2] { Convert.ToString(data[2]), newCookie.Value.ToString() }));
                 }
 
                 return "Success";

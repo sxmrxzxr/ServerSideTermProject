@@ -14,13 +14,14 @@ namespace TermLibrary
         static DBConnect objdb = new DBConnect();
         static SqlCommand objcmd;
 
-        public static List<Param> BuildNewAccountParams(string[] param)
+        public static List<Param> BuildNewAccountParams(object[] param)
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("LastName", param[0], SqlDbType.VarChar));
             p.Add(new Param("FirstName", param[1], SqlDbType.VarChar));
             p.Add(new Param("Email", param[2], SqlDbType.VarChar));
             p.Add(new Param("Passwd", param[3], SqlDbType.VarChar));
+            p.Add(new Param("IsAdmin", Convert.ToBoolean(param[4]), SqlDbType.Bit));
             return p;
         }
 
