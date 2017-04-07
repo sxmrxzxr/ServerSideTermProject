@@ -9,6 +9,7 @@ namespace WebClient
 {
     public partial class Register : System.Web.UI.Page
     {
+        TermSVC.TermService pxy = new TermSVC.TermService();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -38,7 +39,25 @@ namespace WebClient
             }
             else
             {
+                HttpCookie myCookie = new HttpCookie("userCookie");
+                myCookie.Value = "CIS3342";
+                myCookie.Expires = new DateTime(2017, 7, 1);
+                myCookie.Values["Email"] = txtEmail.Text;
+                Response.Cookies.Add(myCookie);
 
+                object[] data = new object[5];
+                data[0] = txtLastName.Text;
+                data[1] = txtFirstName.Text;
+                data[2] = txtEmail.Text;
+                data[3] = txtPassword.Text;
+                data[4] = Convert.ToString(false);
+                bool check = false;
+                if(chkRememberMe.Checked)
+                {
+                    check = true;
+                }
+                string check2 = pxy.CreateNewAccount(data, check);
+                Response.Write(check2);
             }
         }
     }
