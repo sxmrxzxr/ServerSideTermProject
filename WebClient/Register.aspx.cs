@@ -50,7 +50,8 @@ namespace WebClient
                 data[1] = txtFirstName.Text;
                 data[2] = txtEmail.Text;
                 data[3] = txtPassword.Text;
-                data[4] = Convert.ToString(false);
+                data[4] = Convert.ToString(chkRegisterAsAnAdmin.Checked);
+
                 bool check = false;
                 if(chkRememberMe.Checked)
                 {
@@ -58,7 +59,31 @@ namespace WebClient
                 }
                 string check2 = pxy.CreateNewAccount(data, check);
                 Response.Write(check2);
+
+                modifyControls();
             }
+        }
+
+        private void modifyControls()
+        {
+            lblFirstName.Visible = false;
+            lblLastName.Visible = false;
+            lblEmail.Visible = false;
+            lblPassword.Visible = false;
+            txtFirstName.Visible = false;
+            txtLastName.Visible = false;
+            txtEmail.Visible = false;
+            txtPassword.Visible = false;
+            btnRegister.Visible = false;
+            chkRegisterAsAnAdmin.Visible = false;
+            chkRememberMe.Visible = false;
+            lblRegistrationSuccessful.Visible = true;
+            btnReturnToLogin.Visible = true;
+        }
+
+        protected void btnReturnToLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
         }
     }
 }

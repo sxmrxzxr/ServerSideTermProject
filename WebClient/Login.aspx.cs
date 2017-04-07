@@ -17,6 +17,7 @@ namespace WebClient
                 HttpCookie cookie = Request.Cookies["userCookie"];
                 txtEmail.Text = cookie.Values["Email"].ToString();
             }
+            Session["LoginCheck"] = 0;
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
@@ -38,7 +39,13 @@ namespace WebClient
             }
             else
             {
-
+                HttpCookie myCookie = new HttpCookie("userCookie");
+                myCookie.Value = "CIS3342";
+                myCookie.Expires = new DateTime(2017, 7, 1);
+                myCookie.Values["Email"] = txtEmail.Text;
+                Response.Cookies.Add(myCookie);
+                Session["LoginCheck"] = 1;
+                Response.Redirect("Main.aspx");
             }
         }
     }
