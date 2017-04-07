@@ -13,5 +13,33 @@ namespace WebClient
         {
 
         }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            lblRequiredField.Visible = false;
+            lblRequiredField2.Visible = false;
+            lblRequiredField3.Visible = false;
+            lblRequiredField4.Visible = false;
+            if (String.IsNullOrWhiteSpace(txtFirstName.Text))
+            {
+                lblRequiredField.Visible = true;
+            }
+            else if (String.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                lblRequiredField2.Visible = true;
+            }
+            else if (String.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                lblRequiredField3.Visible = true;
+            }
+            else if (String.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                lblRequiredField4.Visible = true;
+            }
+            else
+            {
+
+            }
+        }
     }
 }

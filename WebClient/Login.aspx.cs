@@ -18,5 +18,23 @@ namespace WebClient
         {
             Response.Redirect("Register.aspx");
         }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            lblRequiredField.Visible = false;
+            lblRequiredField2.Visible = false;
+            if (String.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                lblRequiredField.Visible = true;
+            }
+            else if (String.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                lblRequiredField2.Visible = true;
+            }
+            else
+            {
+
+            }
+        }
     }
 }

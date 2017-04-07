@@ -25,7 +25,13 @@
             <asp:TextBox ID="txtPassword" runat="server" style="z-index: 1; left: 388px; top: 213px; position: absolute"></asp:TextBox>
             <asp:CheckBox ID="chkRememberMe" runat="server" Font-Size="Medium" style="z-index: 1; left: 315px; top: 256px; position: absolute" Text="Remember Me?" TextAlign="Left" />
         </p>
-        <asp:Button ID="btnRegister" runat="server" style="z-index: 1; left: 319px; top: 297px; position: absolute" Text="Register" />
+        <asp:Button ID="btnRegister" runat="server" OnClick="btnRegister_Click" style="z-index: 1; left: 319px; top: 297px; position: absolute" Text="Register" />
+        <p>
+            <asp:Label ID="lblRequiredField" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 109px; position: absolute" Text="Required Field" Visible="False"></asp:Label>
+            <asp:Label ID="lblRequiredField2" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 146px; position: absolute; bottom: 380px" Text="Required Field" Visible="False"></asp:Label>
+            <asp:Label ID="lblRequiredField3" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 182px; position: absolute" Text="Required Field" Visible="False"></asp:Label>
+            <asp:Label ID="lblRequiredField4" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 215px; position: absolute" Text="Required Field" Visible="False"></asp:Label>
+        </p>
     </form>
 </body>
 </html>
