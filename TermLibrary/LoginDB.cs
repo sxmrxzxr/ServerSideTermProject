@@ -24,6 +24,14 @@ namespace TermLibrary
             return p;
         }
 
+        public static List<Param> BuildNewCookieParams(string[] param)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("Email", param[0], SqlDbType.VarChar));
+            p.Add(new Param("Cookie", param[1], SqlDbType.VarChar));
+            return p;
+        }
+
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
