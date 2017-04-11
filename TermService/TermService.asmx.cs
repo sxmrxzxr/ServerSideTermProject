@@ -28,7 +28,7 @@ namespace TermService
         public bool Login(string[] credentials, bool rememberMe)
         {
             int success = LoginDB.ExecuteQuery("LoginUser", LoginDB.BuildNewLoginParams(credentials));
-            return success == 1;
+            return success > 0;
         }
 
         [WebMethod]

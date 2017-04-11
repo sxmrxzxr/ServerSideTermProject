@@ -9,6 +9,7 @@ namespace WebClient
 {
     public partial class Main : System.Web.UI.Page
     {
+        TermSVC.TermService pxy = new TermSVC.TermService();
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((int)Session["LoginCheck"] == 0)

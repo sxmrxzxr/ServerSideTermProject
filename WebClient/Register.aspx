@@ -5,6 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style>
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -35,7 +38,7 @@
             <asp:Label ID="lblRequiredField3" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 182px; position: absolute" Text="Required Field" Visible="False"></asp:Label>
             <asp:Label ID="lblRequiredField4" runat="server" ForeColor="Red" style="z-index: 1; left: 548px; top: 215px; position: absolute" Text="Required Field" Visible="False"></asp:Label>
         </p>
-        <asp:CheckBox ID="chkRegisterAsAnAdmin" runat="server" style="z-index: 1; left: 310px; top: 256px; position: absolute" Text="Register As an Admin?" TextAlign="Left" />
+        <!-- <asp:CheckBox ID="chkRegisterAsAnAdmin" runat="server" style="z-index: 1; left: 310px; top: 256px; position: absolute" Text="Register As an Admin?" TextAlign="Left" /> -->
     </form>
 </body>
 </html>
