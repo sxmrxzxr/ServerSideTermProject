@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{4A064349-1A6C-4073-B50D-6E880368DB53}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TermLibrary", "TermLibrary\TermLibrary.csproj", "{FB0B9E7C-DBC1-49B4-9431-2D8979FECE7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TermService", "TermService\TermService.csproj", "{585409B8-162D-4088-B598-5191012F1312}"
@@ -15,6 +17,11 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A064349-1A6C-4073-B50D-6E880368DB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A064349-1A6C-4073-B50D-6E880368DB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A064349-1A6C-4073-B50D-6E880368DB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A064349-1A6C-4073-B50D-6E880368DB53}.Release|Any CPU.Build.0 = Release|Any CPU
+
 		{FB0B9E7C-DBC1-49B4-9431-2D8979FECE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB0B9E7C-DBC1-49B4-9431-2D8979FECE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB0B9E7C-DBC1-49B4-9431-2D8979FECE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +34,7 @@ Global
 		{E39A133D-C29B-4B4E-B565-265C3FBE771A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E39A133D-C29B-4B4E-B565-265C3FBE771A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E39A133D-C29B-4B4E-B565-265C3FBE771A}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
