@@ -38,7 +38,6 @@ namespace TermLibrary
             List<Param> p = new List<Param>();
             p.Add(new Param("Email", param[0], SqlDbType.VarChar));
             p.Add(new Param("Passwd", param[1], SqlDbType.VarChar));
-            p.Add(new Param("return", 0, SqlDbType.Int));
             return p;
         }
 

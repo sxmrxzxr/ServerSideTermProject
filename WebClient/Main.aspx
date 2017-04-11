@@ -12,6 +12,7 @@
     
     </div>
         <asp:Label ID="lblWelcome" runat="server" Font-Size="XX-Large" style="z-index: 1; left: 435px; top: 48px; position: absolute" Text="Welcome!"></asp:Label>
+                <asp:Label ID="lblLoginValue" runat="server" ForeColor="Red"></asp:Label>
     </form>
 </body>
 </html>
