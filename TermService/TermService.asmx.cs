@@ -25,6 +25,13 @@ namespace TermService
         }
 
         [WebMethod]
+        public bool Login(string[] credentials, bool rememberMe)
+        {
+            int success = LoginDB.ExecuteQuery("LoginUser", LoginDB.BuildNewLoginParams(credentials));
+            return success == 1;
+        }
+
+        [WebMethod]
         public string CreateNewAccount(object[] data, bool rememberMe)
         {
             // 0 == failure

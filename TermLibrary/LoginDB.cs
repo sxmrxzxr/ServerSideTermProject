@@ -33,6 +33,15 @@ namespace TermLibrary
             return p;
         }
 
+        public static List<Param> BuildNewLoginParams(string[] param)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("Email", param[0], SqlDbType.VarChar));
+            p.Add(new Param("Passwd", param[1], SqlDbType.VarChar));
+            p.Add(new Param("return", 0, SqlDbType.Int));
+            return p;
+        }
+
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
@@ -48,6 +57,27 @@ namespace TermLibrary
             }
 
             return objdb.DoUpdateUsingCmdObj(objcmd);
+        }
+
+        public static int ExecuteQuery(string procedure, List<Param> paramList)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = procedure;
+
+            foreach (Param p in paramList)
+            {
+                SqlParameter inputParam = new SqlParameter(p.paramName, p.paramVal);
+                inputParam.Direction = ParameterDirection.Input;
+                inputParam.SqlDbType = p.paramType;
+                objcmd.Parameters.Add(inputParam);
+            }
+            SqlConnection c =objdb.GetConnection();
+            c.Open();
+            Object x = DBConnect.ExecuteScalarFunction(objcmd);
+            c.Close();
+            int retval = Convert.ToInt32(x);
+            return retval;
         }
     }
 }
