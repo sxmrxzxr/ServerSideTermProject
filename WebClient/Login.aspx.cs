@@ -27,6 +27,11 @@ namespace WebClient
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            string[] stringArray = new string[3];
+            stringArray[0] = txtEmail.Text;
+            stringArray[1] = txtPassword.Text;
+
+            lblLoginFailed.Visible = false;
             lblRequiredField.Visible = false;
             lblRequiredField2.Visible = false;
             if (String.IsNullOrWhiteSpace(txtEmail.Text))
@@ -37,8 +42,15 @@ namespace WebClient
             {
                 lblRequiredField2.Visible = true;
             }
+            else if(pxy.Login(stringArray, true))
+            {
+                lblLoginFailed.Visible = true;
+            }
             else
             {
+                lblLoginFailed.Visible = false;
+                lblRequiredField.Visible = false;
+                lblRequiredField2.Visible = false;
                 HttpCookie myCookie = new HttpCookie("userCookie");
                 myCookie.Value = "CIS3342";
                 myCookie.Expires = new DateTime(2017, 7, 1);

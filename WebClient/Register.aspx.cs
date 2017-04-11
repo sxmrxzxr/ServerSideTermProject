@@ -85,5 +85,10 @@ namespace WebClient
         {
             Response.Redirect("Login.aspx");
         }
+
+        protected void btnReturnToLogin2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 }
