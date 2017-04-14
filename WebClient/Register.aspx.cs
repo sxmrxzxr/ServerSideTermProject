@@ -57,7 +57,7 @@ namespace WebClient
                 {
                     check = true;
                 }
-                string check2 = pxy.CreateNewAccount(data, check);
+                string check2 = pxy.CreateNewAccount(data, check, "BADTOKEN");
                 Response.Write(check2);
 
                 modifyControls();

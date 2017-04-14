@@ -36,6 +36,8 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback CreateNewAccountOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WriteNewFileToStorageOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -84,6 +86,9 @@ namespace WebClient.TermSVC {
         public event CreateNewAccountCompletedEventHandler CreateNewAccountCompleted;
         
         /// <remarks/>
+        public event WriteNewFileToStorageCompletedEventHandler WriteNewFileToStorageCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string HelloWorld() {
             object[] results = this.Invoke("HelloWorld", new object[0]);
@@ -112,26 +117,28 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool Login(string[] credentials, bool rememberMe) {
+        public bool Login(string[] credentials, bool rememberMe, string verify) {
             object[] results = this.Invoke("Login", new object[] {
                         credentials,
-                        rememberMe});
+                        rememberMe,
+                        verify});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void LoginAsync(string[] credentials, bool rememberMe) {
-            this.LoginAsync(credentials, rememberMe, null);
+        public void LoginAsync(string[] credentials, bool rememberMe, string verify) {
+            this.LoginAsync(credentials, rememberMe, verify, null);
         }
         
         /// <remarks/>
-        public void LoginAsync(string[] credentials, bool rememberMe, object userState) {
+        public void LoginAsync(string[] credentials, bool rememberMe, string verify, object userState) {
             if ((this.LoginOperationCompleted == null)) {
                 this.LoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginOperationCompleted);
             }
             this.InvokeAsync("Login", new object[] {
                         credentials,
-                        rememberMe}, this.LoginOperationCompleted, userState);
+                        rememberMe,
+                        verify}, this.LoginOperationCompleted, userState);
         }
         
         private void OnLoginOperationCompleted(object arg) {
@@ -143,32 +150,69 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateNewAccount", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string CreateNewAccount(object[] data, bool rememberMe) {
+        public string CreateNewAccount(object[] data, bool rememberMe, string verify) {
             object[] results = this.Invoke("CreateNewAccount", new object[] {
                         data,
-                        rememberMe});
+                        rememberMe,
+                        verify});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateNewAccountAsync(object[] data, bool rememberMe) {
-            this.CreateNewAccountAsync(data, rememberMe, null);
+        public void CreateNewAccountAsync(object[] data, bool rememberMe, string verify) {
+            this.CreateNewAccountAsync(data, rememberMe, verify, null);
         }
         
         /// <remarks/>
-        public void CreateNewAccountAsync(object[] data, bool rememberMe, object userState) {
+        public void CreateNewAccountAsync(object[] data, bool rememberMe, string verify, object userState) {
             if ((this.CreateNewAccountOperationCompleted == null)) {
                 this.CreateNewAccountOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateNewAccountOperationCompleted);
             }
             this.InvokeAsync("CreateNewAccount", new object[] {
                         data,
-                        rememberMe}, this.CreateNewAccountOperationCompleted, userState);
+                        rememberMe,
+                        verify}, this.CreateNewAccountOperationCompleted, userState);
         }
         
         private void OnCreateNewAccountOperationCompleted(object arg) {
             if ((this.CreateNewAccountCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CreateNewAccountCompleted(this, new CreateNewAccountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WriteNewFileToStorage", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WriteNewFileToStorage(object[] data, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] filecontent, string accEmail, string verify) {
+            object[] results = this.Invoke("WriteNewFileToStorage", new object[] {
+                        data,
+                        filecontent,
+                        accEmail,
+                        verify});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WriteNewFileToStorageAsync(object[] data, byte[] filecontent, string accEmail, string verify) {
+            this.WriteNewFileToStorageAsync(data, filecontent, accEmail, verify, null);
+        }
+        
+        /// <remarks/>
+        public void WriteNewFileToStorageAsync(object[] data, byte[] filecontent, string accEmail, string verify, object userState) {
+            if ((this.WriteNewFileToStorageOperationCompleted == null)) {
+                this.WriteNewFileToStorageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWriteNewFileToStorageOperationCompleted);
+            }
+            this.InvokeAsync("WriteNewFileToStorage", new object[] {
+                        data,
+                        filecontent,
+                        accEmail,
+                        verify}, this.WriteNewFileToStorageOperationCompleted, userState);
+        }
+        
+        private void OnWriteNewFileToStorageOperationCompleted(object arg) {
+            if ((this.WriteNewFileToStorageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WriteNewFileToStorageCompleted(this, new WriteNewFileToStorageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -265,6 +309,32 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void WriteNewFileToStorageCompletedEventHandler(object sender, WriteNewFileToStorageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WriteNewFileToStorageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WriteNewFileToStorageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }
