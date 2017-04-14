@@ -18,6 +18,8 @@ namespace TermService
     public class TermService : System.Web.Services.WebService
     {
 
+        private string VERIFICATION_TOKEN = "BADTOKEN";
+
         [WebMethod]
         public string HelloWorld()
         {
@@ -35,7 +37,7 @@ namespace TermService
         public string CreateNewAccount(object[] data, bool rememberMe)
         {
             // 0 == failure
-            int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
+            int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
 
             if (success == 1)
             {
@@ -57,6 +59,23 @@ namespace TermService
             {
                 return "Did not write to database";
             }
+        }
+
+        [WebMethod]
+        public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail)
+        {
+            List<Param> l = new List<Param>();
+            l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
+            int fileID = LoginDB.ExecuteQuery("NewFile", l);
+
+            l = new List<Param>();
+            l.Add(new Param("Email", accEmail, SqlDbType.Varchar));
+            int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
+
+            LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data));
+            LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
+            LoginDB.ExecuteQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, data[4]));
+            //TODO: add procedure for getting remaining storage in account
         }
     }
 }
