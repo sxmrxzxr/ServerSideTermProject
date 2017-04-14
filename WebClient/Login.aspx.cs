@@ -18,6 +18,7 @@ namespace WebClient
                 txtEmail.Text = cookie.Values["Email"].ToString();
             }
             Session["LoginCheck"] = 0;
+            
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
@@ -57,6 +58,7 @@ namespace WebClient
                 myCookie.Values["Email"] = txtEmail.Text;
                 Response.Cookies.Add(myCookie);
                 Session["LoginCheck"] = 1;
+                Session["UserEmail"] = txtEmail.Text;
                 Response.Redirect("Main.aspx");
             }
         }

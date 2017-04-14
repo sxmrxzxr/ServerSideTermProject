@@ -11,9 +11,14 @@ namespace WebClient
     public partial class AdminRegister : System.Web.UI.Page
     {
         DBConnect objDB = new DBConnect();
+        TermSVC.TermService pxy = new TermSVC.TermService();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if ((int)Session["LoginCheck"] == 0)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else if (!IsPostBack)
             {
                 String strSQL = "SELECT * FROM Product";
                 gvUsers.DataSource = objDB.GetDataSet(strSQL);
@@ -25,11 +30,14 @@ namespace WebClient
         {
             for (int row = 0; row < gvUsers.Rows.Count; row++)
             {
+                string firstName, lastName, email;
                 CheckBox CBox;
                 CBox = (CheckBox)gvUsers.Rows[row].FindControl("chkSelect");
                 if (CBox.Checked)
                 {
-
+                    firstName = gvUsers.Rows[row].Cells[1].Text;
+                    lastName = gvUsers.Rows[row].Cells[2].Text;
+                    email = gvUsers.Rows[row].Cells[3].Text;
                 }
 
             }

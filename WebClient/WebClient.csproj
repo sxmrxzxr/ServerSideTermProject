@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminMain.aspx" />
     <Content Include="AdminRegister.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
@@ -123,6 +124,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMain.aspx.cs">
+      <DependentUpon>AdminMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMain.aspx.designer.cs">
+      <DependentUpon>AdminMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminRegister.aspx.cs">
       <DependentUpon>AdminRegister.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
