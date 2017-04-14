@@ -105,6 +105,7 @@ namespace TermLibrary
             c.Open();
             Object x = DBConnect.ExecuteScalarFunction(objcmd);
             c.Close();
+            objdb.CloseConnection();
             int retval = Convert.ToInt32(x);
             return retval;
         }

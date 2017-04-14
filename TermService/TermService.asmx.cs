@@ -67,7 +67,9 @@ namespace TermService
         {
             List<Param> l = new List<Param>();
             l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
-            int fileID = LoginDB.ExecuteQuery("NewFile", l);
+            LoginDB.ExecuteQuery("NewFile", l);
+
+            int fileID = LoginDB.ExecuteQuery("GetFileID", l);
 
             l = new List<Param>();
             l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
