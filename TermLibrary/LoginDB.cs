@@ -41,6 +41,36 @@ namespace TermLibrary
             return p;
         }
 
+        public static List<Param> BuildNewFileDataParams(int fileID, object[] param)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileID", fileID, SqlDbType.Int));
+            p.Add(new Param("Name", param[0], SqlDbType.VarChar));
+            p.Add(new Param("FileType", param[1], SqlDbType.VarChar));
+            p.Add(new Param("DateUploaded", param[2], SqlDbType.DateTime));
+            p.Add(new Param("DateModified", param[3], SqlDbType.DateTime));
+            p.Add(new Param("FileSize", param[4], SqlDbType.Int));
+            return p;
+        }
+
+        public static List<Param> BuildNewTransactionParams(int fileID, int accoID, object[] param)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("TransactionDateTime", param[3], SqlDbType.DateTime));
+            p.Add(new Param("UploadDownload", 0, SqlDbType.Binary));
+            p.Add(new Param("FileID", fileID, SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return p;
+        }
+
+        public static List<Param> BuildNewUpdateStorageParams(int accoID, int fileSize)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("FileSize", fileSize, SqlDbType.Int));
+            return p;
+        }
+
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
@@ -75,6 +105,7 @@ namespace TermLibrary
             c.Open();
             Object x = DBConnect.ExecuteScalarFunction(objcmd);
             c.Close();
+            objdb.CloseConnection();
             int retval = Convert.ToInt32(x);
             return retval;
         }
