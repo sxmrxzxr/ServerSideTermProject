@@ -23,38 +23,37 @@ namespace WebClient
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            DBConnect objDB = new DBConnect();
-            SqlCommand objCommand = new SqlCommand();
-            int result = 0, imageSize;
-            string fileExtension, imageType, imageName, imageTitle, strSQL;
+            
+            int result = 0, fileSize;
+            string fileExtension, fileName;
 
             try
             {
                
                 if (FileUpload.HasFile)
                 {
-                    imageSize = FileUpload.PostedFile.ContentLength;
-                    byte[] imageData = new byte[imageSize];
+                    fileSize = FileUpload.PostedFile.ContentLength;
+                    byte[] imageData = new byte[fileSize];
 
-                    FileUpload.PostedFile.InputStream.Read(imageData, 0, imageSize);
-                    imageName = FileUpload.PostedFile.FileName;
-                    imageType = FileUpload.PostedFile.ContentType;
-                    fileExtension = imageName.Substring(imageName.LastIndexOf("."));
+                    FileUpload.PostedFile.InputStream.Read(imageData, 0, fileSize);
+                    fileName = FileUpload.PostedFile.FileName;
+                 
+                    fileExtension = fileName.Substring(fileName.LastIndexOf("."));
                     fileExtension = fileExtension.ToLower();
 
-            
-                    strSQL = "StoreProductImage";
-                    objCommand.CommandText = strSQL;
-                    objCommand.CommandType = CommandType.StoredProcedure;
-                    objCommand.Parameters.AddWithValue("@ImageData", imageData);
-                    objCommand.Parameters.AddWithValue("@ImageType", imageType);
-                    objCommand.Parameters.AddWithValue("@ImageLength", imageData.Length);
-                    result = objDB.DoUpdateUsingCmdObj(objCommand);
+                    object[] objArray = new object[5];
+                    objArray[0] = fileName;
+                    objArray[1] = fileExtension;
+                    objArray[2] = DateTime.Now;
+                    objArray[3] = DateTime.Now;
+                    objArray[4] = fileSize;
+
+                    pxy.WriteNewFileToStorage(objArray, imageData, (string)Session["UserEmail"], txtVerificationToken.Text);
                 }
             }
             catch (Exception ex)
             {
-                //error message
+                Response.Write("Error" + ex.ToString());
             }
         }
     }
