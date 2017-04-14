@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -27,14 +28,14 @@ namespace TermService
         }
 
         [WebMethod]
-        public bool Login(string[] credentials, bool rememberMe)
+        public bool Login(string[] credentials, bool rememberMe, string verify)
         {
             int success = LoginDB.ExecuteQuery("LoginUser", LoginDB.BuildNewLoginParams(credentials));
             return success > 0;
         }
 
         [WebMethod]
-        public string CreateNewAccount(object[] data, bool rememberMe)
+        public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
             int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
@@ -62,20 +63,25 @@ namespace TermService
         }
 
         [WebMethod]
-        public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail)
+        public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail, string verify)
         {
             List<Param> l = new List<Param>();
             l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
             int fileID = LoginDB.ExecuteQuery("NewFile", l);
 
             l = new List<Param>();
-            l.Add(new Param("Email", accEmail, SqlDbType.Varchar));
+            l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
             int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
 
             LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data));
             LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
-            LoginDB.ExecuteQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, data[4]));
-            //TODO: add procedure for getting remaining storage in account
+            LoginDB.ExecuteQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+
+            l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
+
+            return remaining;
         }
     }
 }
