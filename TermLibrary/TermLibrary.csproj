@@ -45,8 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Desktop\CIS3342 %282%29\CIS3342\Utilities\Utilities.csproj">
-      <Project>{e39a133d-c29b-4b4e-b565-265c3fbe771a}</Project>
+    <ProjectReference Include="G:\CIS3342\CIS3342\Utilities\Utilities.csproj">
+      <Project>{1ab25d38-5d07-4e73-b678-052512953299}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>

@@ -18,6 +18,12 @@
         <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 226px; top: 195px; position: absolute; width: 87px" Text="Upload" />
         <asp:Label ID="lblEnterVerification" runat="server" style="z-index: 1; left: 35px; top: 115px; position: absolute" Text="Enter Verification Token:"></asp:Label>
         <asp:TextBox ID="txtVerificationToken" runat="server" style="z-index: 1; left: 195px; top: 114px; position: absolute"></asp:TextBox>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <asp:Label ID="lblData" runat="server" Text="Look here"></asp:Label>
     </form>
 </body>
 </html>

@@ -38,7 +38,7 @@ namespace TermService
         public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
-            int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
+            int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
 
             if (success == 1)
             {
@@ -75,9 +75,9 @@ namespace TermService
             l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
             int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
 
-            LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data));
-            LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
-            LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+            int datasuccess = LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data, accoID));
+            int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
+            int updatesuccess = LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
 
             l = new List<Param>();
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));

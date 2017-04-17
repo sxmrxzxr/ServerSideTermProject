@@ -48,7 +48,10 @@ namespace WebClient
                     objArray[3] = DateTime.Now;
                     objArray[4] = fileSize;
 
+                    lblData.Text = objArray[0].ToString() + ", " + objArray[1].ToString() + ", " + objArray[2].ToString() + ", " + objArray[3].ToString() + ", " + objArray[4].ToString();                
+
                     pxy.WriteNewFileToStorage(objArray, imageData, (string)Session["UserEmail"], txtVerificationToken.Text);
+                    
                 }
             }
             catch (Exception ex)

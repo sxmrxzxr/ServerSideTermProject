@@ -41,7 +41,7 @@ namespace TermLibrary
             return p;
         }
 
-        public static List<Param> BuildNewFileDataParams(int fileID, object[] param)
+        public static List<Param> BuildNewFileDataParams(int fileID, object[] param, int accoID)
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
@@ -50,6 +50,7 @@ namespace TermLibrary
             p.Add(new Param("DateUploaded", param[2], SqlDbType.DateTime));
             p.Add(new Param("DateModified", param[3], SqlDbType.DateTime));
             p.Add(new Param("FileSize", param[4], SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
         }
 
@@ -57,7 +58,7 @@ namespace TermLibrary
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("TransactionDateTime", param[3], SqlDbType.DateTime));
-            p.Add(new Param("UploadDownload", 0, SqlDbType.Binary));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(true) }, SqlDbType.Binary));
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
