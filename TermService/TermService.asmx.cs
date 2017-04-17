@@ -67,9 +67,9 @@ namespace TermService
         {
             List<Param> l = new List<Param>();
             l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
-            LoginDB.ExecuteQuery("NewFile", l);
+            int fileID = LoginDB.ExecuteQuery("NewFile", l);
 
-            int fileID = LoginDB.ExecuteQuery("GetFileID", l);
+            //int fileID = LoginDB.ExecuteQuery("GetFileID", l);
 
             l = new List<Param>();
             l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
@@ -77,7 +77,7 @@ namespace TermService
 
             LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data));
             LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
-            LoginDB.ExecuteQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+            LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
 
             l = new List<Param>();
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));

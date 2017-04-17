@@ -101,11 +101,9 @@ namespace TermLibrary
                 inputParam.SqlDbType = p.paramType;
                 objcmd.Parameters.Add(inputParam);
             }
-            SqlConnection c =objdb.GetConnection();
-            c.Open();
-            Object x = DBConnect.ExecuteScalarFunction(objcmd);
-            c.Close();
-            //objdb.CloseConnection();
+
+            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+            int x = Convert.ToInt32(results.Tables[0].Rows[0][0]);
             int retval = Convert.ToInt32(x);
             return retval;
         }
