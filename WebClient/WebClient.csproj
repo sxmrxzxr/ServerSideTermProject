@@ -178,10 +178,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx">
+    <WebReferenceUrl Include="http://localhost:4608/TermService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
-      <UpdateFromURL>http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:4608/TermService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
