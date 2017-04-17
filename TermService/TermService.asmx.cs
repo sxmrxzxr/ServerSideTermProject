@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -18,6 +19,8 @@ namespace TermService
     public class TermService : System.Web.Services.WebService
     {
 
+        private string VERIFICATION_TOKEN = "BADTOKEN";
+
         [WebMethod]
         public string HelloWorld()
         {
@@ -25,17 +28,17 @@ namespace TermService
         }
 
         [WebMethod]
-        public bool Login(string[] credentials, bool rememberMe)
+        public bool Login(string[] credentials, bool rememberMe, string verify)
         {
             int success = LoginDB.ExecuteQuery("LoginUser", LoginDB.BuildNewLoginParams(credentials));
             return success > 0;
         }
 
         [WebMethod]
-        public string CreateNewAccount(object[] data, bool rememberMe)
+        public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
-            int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
+            int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
 
             if (success == 1)
             {
@@ -57,6 +60,30 @@ namespace TermService
             {
                 return "Did not write to database";
             }
+        }
+
+        [WebMethod]
+        public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail, string verify)
+        {
+            List<Param> l = new List<Param>();
+            l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
+            LoginDB.ExecuteQuery("NewFile", l);
+
+            int fileID = LoginDB.ExecuteQuery("GetFileID", l);
+
+            l = new List<Param>();
+            l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
+            int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
+
+            LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data));
+            LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
+            LoginDB.ExecuteQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+
+            l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
+
+            return remaining;
         }
     }
 }
