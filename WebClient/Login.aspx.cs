@@ -42,7 +42,7 @@ namespace WebClient
             {
                 lblRequiredField2.Visible = true;
             }
-            else if(!(pxy.Login(stringArray, true)))
+            else if(!(pxy.Login(stringArray, true, "BADTOKEN")))
             {
                 lblLoginFailed.Visible = true;
             }
