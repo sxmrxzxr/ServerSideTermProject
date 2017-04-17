@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="WebClient_TermSVC_TermService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</Value>
+      <Value Profile="(Default)">http://localhost:4608/TermService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
