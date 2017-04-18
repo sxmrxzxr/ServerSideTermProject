@@ -20,6 +20,7 @@ namespace WebClient.TermSVC {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -37,6 +38,14 @@ namespace WebClient.TermSVC {
         private System.Threading.SendOrPostCallback CreateNewAccountOperationCompleted;
         
         private System.Threading.SendOrPostCallback WriteNewFileToStorageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateFileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeleteFileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAccountInfoWithEmailOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetFileDataOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -87,6 +96,18 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         public event WriteNewFileToStorageCompletedEventHandler WriteNewFileToStorageCompleted;
+        
+        /// <remarks/>
+        public event UpdateFileCompletedEventHandler UpdateFileCompleted;
+        
+        /// <remarks/>
+        public event DeleteFileCompletedEventHandler DeleteFileCompleted;
+        
+        /// <remarks/>
+        public event GetAccountInfoWithEmailCompletedEventHandler GetAccountInfoWithEmailCompleted;
+        
+        /// <remarks/>
+        public event GetFileDataCompletedEventHandler GetFileDataCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -217,6 +238,132 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateFile", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int UpdateFile(object[] data, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] filecontent, string accEmail, string verify) {
+            object[] results = this.Invoke("UpdateFile", new object[] {
+                        data,
+                        filecontent,
+                        accEmail,
+                        verify});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateFileAsync(object[] data, byte[] filecontent, string accEmail, string verify) {
+            this.UpdateFileAsync(data, filecontent, accEmail, verify, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateFileAsync(object[] data, byte[] filecontent, string accEmail, string verify, object userState) {
+            if ((this.UpdateFileOperationCompleted == null)) {
+                this.UpdateFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateFileOperationCompleted);
+            }
+            this.InvokeAsync("UpdateFile", new object[] {
+                        data,
+                        filecontent,
+                        accEmail,
+                        verify}, this.UpdateFileOperationCompleted, userState);
+        }
+        
+        private void OnUpdateFileOperationCompleted(object arg) {
+            if ((this.UpdateFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateFileCompleted(this, new UpdateFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeleteFile", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int DeleteFile(int fileID, int fileSize, string email) {
+            object[] results = this.Invoke("DeleteFile", new object[] {
+                        fileID,
+                        fileSize,
+                        email});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeleteFileAsync(int fileID, int fileSize, string email) {
+            this.DeleteFileAsync(fileID, fileSize, email, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteFileAsync(int fileID, int fileSize, string email, object userState) {
+            if ((this.DeleteFileOperationCompleted == null)) {
+                this.DeleteFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteFileOperationCompleted);
+            }
+            this.InvokeAsync("DeleteFile", new object[] {
+                        fileID,
+                        fileSize,
+                        email}, this.DeleteFileOperationCompleted, userState);
+        }
+        
+        private void OnDeleteFileOperationCompleted(object arg) {
+            if ((this.DeleteFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteFileCompleted(this, new DeleteFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAccountInfoWithEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string[] GetAccountInfoWithEmail(string email) {
+            object[] results = this.Invoke("GetAccountInfoWithEmail", new object[] {
+                        email});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAccountInfoWithEmailAsync(string email) {
+            this.GetAccountInfoWithEmailAsync(email, null);
+        }
+        
+        /// <remarks/>
+        public void GetAccountInfoWithEmailAsync(string email, object userState) {
+            if ((this.GetAccountInfoWithEmailOperationCompleted == null)) {
+                this.GetAccountInfoWithEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAccountInfoWithEmailOperationCompleted);
+            }
+            this.InvokeAsync("GetAccountInfoWithEmail", new object[] {
+                        email}, this.GetAccountInfoWithEmailOperationCompleted, userState);
+        }
+        
+        private void OnGetAccountInfoWithEmailOperationCompleted(object arg) {
+            if ((this.GetAccountInfoWithEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAccountInfoWithEmailCompleted(this, new GetAccountInfoWithEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFileData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetFileData(string email) {
+            object[] results = this.Invoke("GetFileData", new object[] {
+                        email});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetFileDataAsync(string email) {
+            this.GetFileDataAsync(email, null);
+        }
+        
+        /// <remarks/>
+        public void GetFileDataAsync(string email, object userState) {
+            if ((this.GetFileDataOperationCompleted == null)) {
+                this.GetFileDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFileDataOperationCompleted);
+            }
+            this.InvokeAsync("GetFileData", new object[] {
+                        email}, this.GetFileDataOperationCompleted, userState);
+        }
+        
+        private void OnGetFileDataOperationCompleted(object arg) {
+            if ((this.GetFileDataCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetFileDataCompleted(this, new GetFileDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -335,6 +482,110 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void UpdateFileCompletedEventHandler(object sender, UpdateFileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void DeleteFileCompletedEventHandler(object sender, DeleteFileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeleteFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeleteFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetAccountInfoWithEmailCompletedEventHandler(object sender, GetAccountInfoWithEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAccountInfoWithEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAccountInfoWithEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetFileDataCompletedEventHandler(object sender, GetFileDataCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetFileDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetFileDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

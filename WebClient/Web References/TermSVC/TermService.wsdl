@@ -71,6 +71,74 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="UpdateFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfAnyType" />
+            <s:element minOccurs="0" maxOccurs="1" name="filecontent" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="accEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="verify" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateFileResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fileSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteFileResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoWithEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoWithEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountInfoWithEmailResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFileDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -97,6 +165,30 @@
   <wsdl:message name="WriteNewFileToStorageSoapOut">
     <wsdl:part name="parameters" element="tns:WriteNewFileToStorageResponse" />
   </wsdl:message>
+  <wsdl:message name="UpdateFileSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateFile" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFileSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteFile" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoWithEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoWithEmail" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoWithEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoWithEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFileDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFileData" />
+  </wsdl:message>
+  <wsdl:message name="GetFileDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFileDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="TermServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -113,6 +205,22 @@
     <wsdl:operation name="WriteNewFileToStorage">
       <wsdl:input message="tns:WriteNewFileToStorageSoapIn" />
       <wsdl:output message="tns:WriteNewFileToStorageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFile">
+      <wsdl:input message="tns:UpdateFileSoapIn" />
+      <wsdl:output message="tns:UpdateFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <wsdl:input message="tns:DeleteFileSoapIn" />
+      <wsdl:output message="tns:DeleteFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfoWithEmail">
+      <wsdl:input message="tns:GetAccountInfoWithEmailSoapIn" />
+      <wsdl:output message="tns:GetAccountInfoWithEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileData">
+      <wsdl:input message="tns:GetFileDataSoapIn" />
+      <wsdl:output message="tns:GetFileDataSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TermServiceSoap" type="tns:TermServiceSoap">
@@ -153,6 +261,42 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateFile">
+      <soap:operation soapAction="http://tempuri.org/UpdateFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <soap:operation soapAction="http://tempuri.org/DeleteFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfoWithEmail">
+      <soap:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileData">
+      <soap:operation soapAction="http://tempuri.org/GetFileData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TermServiceSoap12" type="tns:TermServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -185,6 +329,42 @@
     </wsdl:operation>
     <wsdl:operation name="WriteNewFileToStorage">
       <soap12:operation soapAction="http://tempuri.org/WriteNewFileToStorage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFile">
+      <soap12:operation soapAction="http://tempuri.org/UpdateFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <soap12:operation soapAction="http://tempuri.org/DeleteFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfoWithEmail">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileData">
+      <soap12:operation soapAction="http://tempuri.org/GetFileData" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
