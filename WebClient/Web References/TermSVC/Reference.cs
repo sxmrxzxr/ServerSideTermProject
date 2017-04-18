@@ -45,6 +45,8 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback GetAccountInfoWithEmailOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetAllAccountsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetFileDataOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -105,6 +107,9 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         public event GetAccountInfoWithEmailCompletedEventHandler GetAccountInfoWithEmailCompleted;
+        
+        /// <remarks/>
+        public event GetAllAccountsCompletedEventHandler GetAllAccountsCompleted;
         
         /// <remarks/>
         public event GetFileDataCompletedEventHandler GetFileDataCompleted;
@@ -335,6 +340,33 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllAccounts", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetAllAccounts() {
+            object[] results = this.Invoke("GetAllAccounts", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllAccountsAsync() {
+            this.GetAllAccountsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllAccountsAsync(object userState) {
+            if ((this.GetAllAccountsOperationCompleted == null)) {
+                this.GetAllAccountsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllAccountsOperationCompleted);
+            }
+            this.InvokeAsync("GetAllAccounts", new object[0], this.GetAllAccountsOperationCompleted, userState);
+        }
+        
+        private void OnGetAllAccountsOperationCompleted(object arg) {
+            if ((this.GetAllAccountsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllAccountsCompleted(this, new GetAllAccountsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFileData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataSet GetFileData(string email) {
             object[] results = this.Invoke("GetFileData", new object[] {
@@ -560,6 +592,32 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetAllAccountsCompletedEventHandler(object sender, GetAllAccountsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllAccountsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllAccountsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }
