@@ -67,12 +67,14 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
+
         /// lblEnterAVerificationTokenTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+
         protected global::System.Web.UI.WebControls.Label lblEnterAVerificationTokenTo;
         
         /// <summary>
@@ -83,6 +85,7 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblVerification;
+
         
         /// <summary>
         /// txtVerificationToken control.
@@ -94,6 +97,7 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.TextBox txtVerificationToken;
         
         /// <summary>
+
         /// lblDeleteAFile control.
         /// </summary>
         /// <remarks>
@@ -136,6 +140,8 @@ namespace WebClient {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+
         protected global::System.Web.UI.WebControls.Label Label1;
+
     }
 }
