@@ -41,7 +41,9 @@ namespace TermLibrary
             return p;
         }
 
-        public static List<Param> BuildNewFileDataParams(int fileID, object[] param)
+
+        public static List<Param> BuildNewFileDataParams(int fileID, object[] param, int accoID)
+
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
@@ -50,6 +52,9 @@ namespace TermLibrary
             p.Add(new Param("DateUploaded", param[2], SqlDbType.DateTime));
             p.Add(new Param("DateModified", param[3], SqlDbType.DateTime));
             p.Add(new Param("FileSize", param[4], SqlDbType.Int));
+
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+
             return p;
         }
 
@@ -57,7 +62,9 @@ namespace TermLibrary
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("TransactionDateTime", param[3], SqlDbType.DateTime));
-            p.Add(new Param("UploadDownload", 0, SqlDbType.Binary));
+
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(true) }, SqlDbType.Binary));
+
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
@@ -70,6 +77,23 @@ namespace TermLibrary
             p.Add(new Param("FileSize", fileSize, SqlDbType.Int));
             return p;
         }
+
+
+        public static List<Param> BuildNewUpdateFileParams(object[] data, byte[] filecontent, int accoID)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileDataID", data[0], SqlDbType.Int));
+            p.Add(new Param("FileID", data[1], SqlDbType.Int));
+            p.Add(new Param("FileContent", filecontent, SqlDbType.Int));
+            p.Add(new Param("Name", data[2], SqlDbType.VarChar));
+            p.Add(new Param("DateModified", data[3], SqlDbType.DateTime));
+            p.Add(new Param("FileSize", data[4], SqlDbType.Int));
+            p.Add(new Param("TransactionDateTime", data[5], SqlDbType.DateTime));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return p;
+        }
+
 
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
@@ -88,6 +112,35 @@ namespace TermLibrary
             return objdb.DoUpdateUsingCmdObj(objcmd);
         }
 
+        public static string[] GetAccountInfo(string email)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetTermAccountInfo";
+
+            SqlParameter inputParam = new SqlParameter("Email", email);
+            inputParam.Direction = ParameterDirection.Input;
+            inputParam.SqlDbType = SqlDbType.VarChar;
+            objcmd.Parameters.Add(inputParam);
+
+            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+            string[] accInfo = new string[4]
+            {
+                //results.Tables[0].Rows[0][0].ToString(),
+                results.Tables[0].Rows[0][1].ToString(),
+                results.Tables[0].Rows[0][2].ToString(),
+                results.Tables[0].Rows[0][3].ToString(),
+                results.Tables[0].Rows[0][4].ToString()
+                //results.Tables[0].Rows[0][5].ToString(),
+            };
+            return accInfo;
+        }
+
+        public static DataSet GetAllAccounts()
+        {
+            return objdb.GetDataSet("SELECT * FROM Accounts");
+        }
+
         public static int ExecuteQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
@@ -101,13 +154,37 @@ namespace TermLibrary
                 inputParam.SqlDbType = p.paramType;
                 objcmd.Parameters.Add(inputParam);
             }
-            SqlConnection c =objdb.GetConnection();
-            c.Open();
-            Object x = DBConnect.ExecuteScalarFunction(objcmd);
-            c.Close();
-            //objdb.CloseConnection();
-            int retval = Convert.ToInt32(x);
-            return retval;
+
+
+            try
+            {
+                DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+                int x = Convert.ToInt32(results.Tables[0].Rows[0][0]);
+                int retval = Convert.ToInt32(x);
+                return retval;
+            } catch (Exception ex)
+            {
+                //failed
+                return 0;
+            }        
+            
+        }
+
+        public static DataSet GetFileData(int id)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetFilesWithAccountID";
+
+            SqlParameter inputParam = new SqlParameter("AccountID", id);
+            inputParam.Direction = ParameterDirection.Input;
+            inputParam.SqlDbType = SqlDbType.Int;
+            objcmd.Parameters.Add(inputParam);
+
+            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+
+            return results;
+
         }
     }
 }

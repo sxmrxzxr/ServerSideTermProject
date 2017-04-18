@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{4A064349-1A6C-4073-B50D-6E880368DB53}"
+	ProjectSection(ProjectDependencies) = postProject
+		{585409B8-162D-4088-B598-5191012F1312} = {585409B8-162D-4088-B598-5191012F1312}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TermLibrary", "TermLibrary\TermLibrary.csproj", "{FB0B9E7C-DBC1-49B4-9431-2D8979FECE7B}"
 EndProject
