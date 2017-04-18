@@ -118,6 +118,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetAllAccounts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllAccountsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAccountsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetFileData">
         <s:complexType>
           <s:sequence>
@@ -183,6 +200,12 @@
   <wsdl:message name="GetAccountInfoWithEmailSoapOut">
     <wsdl:part name="parameters" element="tns:GetAccountInfoWithEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="GetAllAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAccounts" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAccountsResponse" />
+  </wsdl:message>
   <wsdl:message name="GetFileDataSoapIn">
     <wsdl:part name="parameters" element="tns:GetFileData" />
   </wsdl:message>
@@ -217,6 +240,10 @@
     <wsdl:operation name="GetAccountInfoWithEmail">
       <wsdl:input message="tns:GetAccountInfoWithEmailSoapIn" />
       <wsdl:output message="tns:GetAccountInfoWithEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAccounts">
+      <wsdl:input message="tns:GetAllAccountsSoapIn" />
+      <wsdl:output message="tns:GetAllAccountsSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetFileData">
       <wsdl:input message="tns:GetFileDataSoapIn" />
@@ -281,6 +308,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAccountInfoWithEmail">
       <soap:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAccounts">
+      <soap:operation soapAction="http://tempuri.org/GetAllAccounts" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -356,6 +392,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAccountInfoWithEmail">
       <soap12:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAccounts">
+      <soap12:operation soapAction="http://tempuri.org/GetAllAccounts" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

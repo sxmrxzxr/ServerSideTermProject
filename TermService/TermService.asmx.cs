@@ -38,7 +38,7 @@ namespace TermService
         public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
-            int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
+            int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
 
             if (success == 1)
             {
@@ -62,6 +62,7 @@ namespace TermService
             }
         }
 
+
         public int GetAccountIDViaEmail(string accEmail)
         {
             List<Param> l = new List<Param>();
@@ -70,11 +71,13 @@ namespace TermService
             return accoID;
         }
 
+
         [WebMethod]
         public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail, string verify)
         {
             List<Param> l = new List<Param>();
             l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
+
             int fileID = LoginDB.ExecuteQuery("NewFile", l);
 
             int accoID = GetAccountIDViaEmail(accEmail);
@@ -99,11 +102,13 @@ namespace TermService
             int otherupdatesuccess = LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
 
             List<Param> l = new List<Param>();
+
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));
             int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
 
             return remaining;
         }
+
 
         [WebMethod]
         public int DeleteFile(int fileID, int fileSize, string email)
@@ -135,5 +140,6 @@ namespace TermService
             int id = GetAccountIDViaEmail(email);
             return LoginDB.GetFileData(id);
         }
+
     }
 }

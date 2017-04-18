@@ -41,7 +41,9 @@ namespace TermLibrary
             return p;
         }
 
+
         public static List<Param> BuildNewFileDataParams(int fileID, object[] param, int accoID)
+
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
@@ -50,7 +52,9 @@ namespace TermLibrary
             p.Add(new Param("DateUploaded", param[2], SqlDbType.DateTime));
             p.Add(new Param("DateModified", param[3], SqlDbType.DateTime));
             p.Add(new Param("FileSize", param[4], SqlDbType.Int));
+
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+
             return p;
         }
 
@@ -58,7 +62,9 @@ namespace TermLibrary
         {
             List<Param> p = new List<Param>();
             p.Add(new Param("TransactionDateTime", param[3], SqlDbType.DateTime));
+
             p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(true) }, SqlDbType.Binary));
+
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
@@ -71,6 +77,7 @@ namespace TermLibrary
             p.Add(new Param("FileSize", fileSize, SqlDbType.Int));
             return p;
         }
+
 
         public static List<Param> BuildNewUpdateFileParams(object[] data, byte[] filecontent, int accoID)
         {
@@ -86,6 +93,7 @@ namespace TermLibrary
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
         }
+
 
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
@@ -147,6 +155,7 @@ namespace TermLibrary
                 objcmd.Parameters.Add(inputParam);
             }
 
+
             try
             {
                 DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
@@ -175,6 +184,7 @@ namespace TermLibrary
             DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
 
             return results;
+
         }
     }
 }

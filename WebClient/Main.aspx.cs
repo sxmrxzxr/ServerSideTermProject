@@ -23,8 +23,6 @@ namespace WebClient
             {
                 gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
                 gvDelete.DataBind();
-                
-
             }
         }
 
