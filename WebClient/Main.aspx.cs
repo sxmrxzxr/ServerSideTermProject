@@ -21,7 +21,7 @@ namespace WebClient
             }
             if(!IsPostBack)
             {
-                gvDelete.DataSource = pxy.GetFileData();
+                gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
                 gvDelete.DataBind();
             }
         }
@@ -107,7 +107,10 @@ namespace WebClient
                 CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
                 if (CBox.Checked)
                 {
-                    //pxy.DeleteFile("BADTOKEN");
+                    int fileID = Convert.ToInt32(gvDelete.Rows[row].Cells[1]);
+                    int fileSize = Convert.ToInt32(gvDelete.Rows[row].Cells[6]);
+
+                    pxy.DeleteFile(fileID, fileSize, (string)Session["UserEmail"]);
                 }
 
             }
