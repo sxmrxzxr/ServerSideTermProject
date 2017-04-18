@@ -24,6 +24,12 @@
                         <asp:CheckBox ID="chkSelect" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField HeaderText="FileID" DataField="FileID" />
+                <asp:BoundField HeaderText="File Name" DataField="Name" />
+                <asp:BoundField HeaderText="File Type" DataField="FileType" />
+                <asp:BoundField HeaderText="Date Uploaded" DataField="DateUploaded" />
+                <asp:BoundField HeaderText="Date Modified" DataField="DateModified" />
+                <asp:BoundField HeaderText="File Size (in Bytes)" DataField="FileSize" />
             </Columns>
         </asp:GridView>
         <asp:Button ID="btnDelete" runat="server" style="z-index: 1; left: 594px; top: 194px; position: absolute" Text="Delete" />

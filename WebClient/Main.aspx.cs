@@ -100,14 +100,14 @@ namespace WebClient
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            for (int row = 0; row < gvUsers.Rows.Count; row++)
+            for (int row = 0; row < gvDelete.Rows.Count; row++)
             {
                 
                 CheckBox CBox;
                 CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
                 if (CBox.Checked)
                 {
-                    pxy.DeleteFile("BADTOKEN");
+                    //pxy.DeleteFile("BADTOKEN");
                 }
 
             }
