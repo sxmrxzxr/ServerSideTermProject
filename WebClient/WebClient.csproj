@@ -192,10 +192,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:4608/TermService.asmx">
+    <WebReferenceUrl Include="http://localhost:5393/TermService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
-      <UpdateFromURL>http://localhost:4608/TermService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:5393/TermService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

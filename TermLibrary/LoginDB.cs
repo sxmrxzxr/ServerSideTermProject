@@ -84,12 +84,12 @@ namespace TermLibrary
             List<Param> p = new List<Param>();
             p.Add(new Param("FileDataID", data[0], SqlDbType.Int));
             p.Add(new Param("FileID", data[1], SqlDbType.Int));
-            p.Add(new Param("FileContent", filecontent, SqlDbType.Int));
+            p.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
             p.Add(new Param("Name", data[2], SqlDbType.VarChar));
             p.Add(new Param("DateModified", data[3], SqlDbType.DateTime));
             p.Add(new Param("FileSize", data[4], SqlDbType.Int));
             p.Add(new Param("TransactionDateTime", data[5], SqlDbType.DateTime));
-            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Int));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Binary));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
         }
@@ -136,9 +136,20 @@ namespace TermLibrary
             return accInfo;
         }
 
+        public static List<Param> BuildUpdateAccountParams(object[] param, int accoID)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("LastName", param[0], SqlDbType.VarChar));
+            p.Add(new Param("FirstName", param[1], SqlDbType.VarChar));
+            p.Add(new Param("Email", param[2], SqlDbType.VarChar));
+            p.Add(new Param("Passwd", param[3], SqlDbType.VarChar));
+            return p;
+        }
+
         public static DataSet GetAllAccounts()
         {
-            return objdb.GetDataSet("SELECT * FROM Accounts");
+            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
