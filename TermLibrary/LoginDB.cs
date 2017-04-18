@@ -84,12 +84,12 @@ namespace TermLibrary
             List<Param> p = new List<Param>();
             p.Add(new Param("FileDataID", data[0], SqlDbType.Int));
             p.Add(new Param("FileID", data[1], SqlDbType.Int));
-            p.Add(new Param("FileContent", filecontent, SqlDbType.Int));
+            p.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
             p.Add(new Param("Name", data[2], SqlDbType.VarChar));
             p.Add(new Param("DateModified", data[3], SqlDbType.DateTime));
             p.Add(new Param("FileSize", data[4], SqlDbType.Int));
             p.Add(new Param("TransactionDateTime", data[5], SqlDbType.DateTime));
-            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Int));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Binary));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return p;
         }

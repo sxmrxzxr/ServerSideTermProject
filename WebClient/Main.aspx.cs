@@ -94,7 +94,8 @@ namespace WebClient
                     objArray[5] = DateTime.Now;
                     objArray[6] = true;
 
-                    pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
+                    int x = pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
+                    Response.Write(x);
                 }
             }
             catch (Exception ex)
