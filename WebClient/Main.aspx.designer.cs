@@ -67,13 +67,25 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
-        /// lblEnterVerification control.
+
+        /// lblEnterAVerificationTokenTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEnterVerification;
+
+        protected global::System.Web.UI.WebControls.Label lblEnterAVerificationTokenTo;
+        
+        /// <summary>
+        /// lblVerification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVerification;
+
         
         /// <summary>
         /// txtVerificationToken control.
@@ -85,12 +97,51 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.TextBox txtVerificationToken;
         
         /// <summary>
-        /// lblData control.
+
+        /// lblDeleteAFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblData;
+        protected global::System.Web.UI.WebControls.Label lblDeleteAFile;
+        
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
+        
+        /// <summary>
+        /// lblNowUploadDeleteUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNowUploadDeleteUpdate;
+        
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+
+        protected global::System.Web.UI.WebControls.Label Label1;
+
     }
 }
