@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -18,6 +19,8 @@ namespace TermService
     public class TermService : System.Web.Services.WebService
     {
 
+        private string VERIFICATION_TOKEN = "BADTOKEN";
+
         [WebMethod]
         public string HelloWorld()
         {
@@ -25,14 +28,14 @@ namespace TermService
         }
 
         [WebMethod]
-        public bool Login(string[] credentials, bool rememberMe)
+        public bool Login(string[] credentials, bool rememberMe, string verify)
         {
             int success = LoginDB.ExecuteQuery("LoginUser", LoginDB.BuildNewLoginParams(credentials));
             return success > 0;
         }
 
         [WebMethod]
-        public string CreateNewAccount(object[] data, bool rememberMe)
+        public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
             int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
@@ -57,6 +60,80 @@ namespace TermService
             {
                 return "Did not write to database";
             }
+        }
+
+        public int GetAccountIDViaEmail(string accEmail)
+        {
+            List<Param> l = new List<Param>();
+            l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
+            int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
+            return accoID;
+        }
+
+        [WebMethod]
+        public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail, string verify)
+        {
+            List<Param> l = new List<Param>();
+            l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
+            int fileID = LoginDB.ExecuteQuery("NewFile", l);
+
+            int accoID = GetAccountIDViaEmail(accEmail);
+
+            int datasuccess = LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data, accoID));
+            int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
+            int updatesuccess = LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+
+            l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
+
+            return remaining;
+        }
+
+        [WebMethod]
+        public int UpdateFile(object[] data, byte[] filecontent, string accEmail, string verify)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+
+            int updatesuccess = LoginDB.ExecuteNonQuery("TermUpdateFile", LoginDB.BuildNewUpdateFileParams(data, filecontent, accoID));
+            int otherupdatesuccess = LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
+
+            return remaining;
+        }
+
+        [WebMethod]
+        public int DeleteFile(int fileID, int fileSize, string email)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileID", fileID, SqlDbType.Int));
+            p.Add(new Param("FileSize", fileSize, SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int success = LoginDB.ExecuteNonQuery("DeleteFile", p);
+            return success;
+        }
+
+        [WebMethod]
+        public string[] GetAccountInfoWithEmail(string email)
+        {
+            return LoginDB.GetAccountInfo(email);
+        }
+
+        [WebMethod]
+        public DataSet GetAllAccounts()
+        {
+            return LoginDB.GetAllAccounts();
+        }
+
+        [WebMethod]
+        public DataSet GetFileData(string email)
+        {
+            int id = GetAccountIDViaEmail(email);
+            return LoginDB.GetFileData(id);
         }
     }
 }

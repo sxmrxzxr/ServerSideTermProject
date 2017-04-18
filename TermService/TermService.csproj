@@ -122,6 +122,10 @@
       <Project>{fb0b9e7c-dbc1-49b4-9431-2d8979fece7b}</Project>
       <Name>TermLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="G:\CIS3342\CIS3342\Utilities\Utilities.csproj">
+      <Project>{1ab25d38-5d07-4e73-b678-052512953299}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
