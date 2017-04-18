@@ -124,6 +124,12 @@ namespace TermService
         }
 
         [WebMethod]
+        public DataSet GetAllAccounts()
+        {
+            return LoginDB.GetAllAccounts();
+        }
+
+        [WebMethod]
         public DataSet GetFileData(string email)
         {
             int id = GetAccountIDViaEmail(email);

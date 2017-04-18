@@ -128,6 +128,11 @@ namespace TermLibrary
             return accInfo;
         }
 
+        public static DataSet GetAllAccounts()
+        {
+            return objdb.GetDataSet("SELECT * FROM Accounts");
+        }
+
         public static int ExecuteQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
