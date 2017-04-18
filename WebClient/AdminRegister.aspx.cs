@@ -10,19 +10,13 @@ namespace WebClient
 {
     public partial class AdminRegister : System.Web.UI.Page
     {
-        DBConnect objDB = new DBConnect();
+        
         TermSVC.TermService pxy = new TermSVC.TermService();
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((int)Session["LoginCheck"] == 0)
             {
                 Response.Redirect("Login.aspx");
-            }
-            else if (!IsPostBack)
-            {
-                String strSQL = "SELECT * FROM Product";
-                gvUsers.DataSource = objDB.GetDataSet(strSQL);
-                gvUsers.DataBind();
             }
         }
 

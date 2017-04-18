@@ -19,6 +19,11 @@ namespace WebClient
             {
                 Response.Redirect("Login.aspx");
             }
+            if(!IsPostBack)
+            {
+                gvDelete.DataSource = pxy.GetFileData();
+                gvDelete.DataBind();
+            }
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
@@ -48,12 +53,63 @@ namespace WebClient
                     objArray[3] = DateTime.Now;
                     objArray[4] = fileSize;
 
-                    pxy.WriteNewFileToStorage(objArray, imageData, (string)Session["UserEmail"], txtVerificationToken.Text);
+                    pxy.WriteNewFileToStorage(objArray, imageData, (string)Session["UserEmail"], "BADTOKEN");
                 }
             }
             catch (Exception ex)
             {
                 Response.Write("Error" + ex.ToString());
+            }
+        }
+        protected void btnModify_Click(object sender, EventArgs e)
+        {
+            int result = 0, fileSize;
+            string fileExtension, fileName;
+
+            try
+            {
+
+                if (FileUpload.HasFile)
+                {
+                    fileSize = FileUpload.PostedFile.ContentLength;
+                    byte[] imageData = new byte[fileSize];
+
+                    FileUpload.PostedFile.InputStream.Read(imageData, 0, fileSize);
+                    fileName = FileUpload.PostedFile.FileName;
+
+                    int fileDataID = 18;
+                    int fileID = 34;
+
+                    object[] objArray = new object[7];
+                    objArray[0] = fileDataID;
+                    objArray[1] = fileID;
+                    objArray[2] = fileName;
+                    objArray[3] = DateTime.Now;
+                    objArray[4] = fileSize;
+                    objArray[5] = DateTime.Now;
+                    objArray[6] = true;
+
+                    pxy.UpdateFile(objArray, imageData, (string)Session["UserEmail"], "BADTOKEN");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error" + ex.ToString());
+            }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            for (int row = 0; row < gvUsers.Rows.Count; row++)
+            {
+                
+                CheckBox CBox;
+                CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
+                if (CBox.Checked)
+                {
+                    pxy.DeleteFile("BADTOKEN");
+                }
+
             }
         }
     }
