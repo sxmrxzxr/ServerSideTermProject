@@ -106,15 +106,28 @@ namespace TermService
         }
 
         [WebMethod]
+        public int DeleteFile(int fileID, int fileSize, string email)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileID", fileID, SqlDbType.Int));
+            p.Add(new Param("FileSize", fileSize, SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int success = LoginDB.ExecuteNonQuery("DeleteFile", p);
+            return success;
+        }
+
+        [WebMethod]
         public string[] GetAccountInfoWithEmail(string email)
         {
             return LoginDB.GetAccountInfo(email);
         }
 
         [WebMethod]
-        public DataSet GetFileData()
+        public DataSet GetFileData(string email)
         {
-            return LoginDB.GetFileData();
+            int id = GetAccountIDViaEmail(email);
+            return LoginDB.GetFileData(id);
         }
     }
 }

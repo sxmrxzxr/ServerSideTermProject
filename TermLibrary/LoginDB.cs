@@ -142,15 +142,34 @@ namespace TermLibrary
                 objcmd.Parameters.Add(inputParam);
             }
 
-            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
-            int x = Convert.ToInt32(results.Tables[0].Rows[0][0]);
-            int retval = Convert.ToInt32(x);
-            return retval;
+            try
+            {
+                DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+                int x = Convert.ToInt32(results.Tables[0].Rows[0][0]);
+                int retval = Convert.ToInt32(x);
+                return retval;
+            } catch (Exception ex)
+            {
+                //failed
+                return 0;
+            }        
+            
         }
 
-        public static DataSet GetFileData()
+        public static DataSet GetFileData(int id)
         {
-            return objdb.GetDataSet("SELECT * FROM TermFileData");
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetFilesWithAccountID";
+
+            SqlParameter inputParam = new SqlParameter("AccountID", id);
+            inputParam.Direction = ParameterDirection.Input;
+            inputParam.SqlDbType = SqlDbType.Int;
+            objcmd.Parameters.Add(inputParam);
+
+            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+
+            return results;
         }
     }
 }
