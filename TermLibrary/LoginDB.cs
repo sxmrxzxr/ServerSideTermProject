@@ -72,6 +72,21 @@ namespace TermLibrary
             return p;
         }
 
+        public static List<Param> BuildNewUpdateFileParams(object[] data, byte[] filecontent, int accoID)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileDataID", data[0], SqlDbType.Int));
+            p.Add(new Param("FileID", data[1], SqlDbType.Int));
+            p.Add(new Param("FileContent", filecontent, SqlDbType.Int));
+            p.Add(new Param("Name", data[2], SqlDbType.VarChar));
+            p.Add(new Param("DateModified", data[3], SqlDbType.DateTime));
+            p.Add(new Param("FileSize", data[4], SqlDbType.Int));
+            p.Add(new Param("TransactionDateTime", data[5], SqlDbType.DateTime));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(data[6]) }, SqlDbType.Int));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return p;
+        }
+
         public static int ExecuteNonQuery(string procedure, List<Param> paramList)
         {
             objcmd = new SqlCommand();
@@ -87,6 +102,30 @@ namespace TermLibrary
             }
 
             return objdb.DoUpdateUsingCmdObj(objcmd);
+        }
+
+        public static string[] GetAccountInfo(string email)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetTermAccountInfo";
+
+            SqlParameter inputParam = new SqlParameter("Email", email);
+            inputParam.Direction = ParameterDirection.Input;
+            inputParam.SqlDbType = SqlDbType.VarChar;
+            objcmd.Parameters.Add(inputParam);
+
+            DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
+            string[] accInfo = new string[4]
+            {
+                //results.Tables[0].Rows[0][0].ToString(),
+                results.Tables[0].Rows[0][1].ToString(),
+                results.Tables[0].Rows[0][2].ToString(),
+                results.Tables[0].Rows[0][3].ToString(),
+                results.Tables[0].Rows[0][4].ToString()
+                //results.Tables[0].Rows[0][5].ToString(),
+            };
+            return accInfo;
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
@@ -107,6 +146,11 @@ namespace TermLibrary
             int x = Convert.ToInt32(results.Tables[0].Rows[0][0]);
             int retval = Convert.ToInt32(x);
             return retval;
+        }
+
+        public static DataSet GetFileData()
+        {
+            return objdb.GetDataSet("SELECT * FROM TermFileData");
         }
     }
 }

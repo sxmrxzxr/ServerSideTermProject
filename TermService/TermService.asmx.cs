@@ -62,6 +62,14 @@ namespace TermService
             }
         }
 
+        public int GetAccountIDViaEmail(string accEmail)
+        {
+            List<Param> l = new List<Param>();
+            l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
+            int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
+            return accoID;
+        }
+
         [WebMethod]
         public int WriteNewFileToStorage(object[] data, byte[] filecontent, string accEmail, string verify)
         {
@@ -69,11 +77,7 @@ namespace TermService
             l.Add(new Param("FileContent", filecontent, SqlDbType.VarBinary));
             int fileID = LoginDB.ExecuteQuery("NewFile", l);
 
-            //int fileID = LoginDB.ExecuteQuery("GetFileID", l);
-
-            l = new List<Param>();
-            l.Add(new Param("Email", accEmail, SqlDbType.VarChar));
-            int accoID = LoginDB.ExecuteQuery("GetAccountID", l);
+            int accoID = GetAccountIDViaEmail(accEmail);
 
             int datasuccess = LoginDB.ExecuteNonQuery("NewFileData", LoginDB.BuildNewFileDataParams(fileID, data, accoID));
             int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
@@ -84,6 +88,33 @@ namespace TermService
             int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
 
             return remaining;
+        }
+
+        [WebMethod]
+        public int UpdateFile(object[] data, byte[] filecontent, string accEmail, string verify)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+
+            int updatesuccess = LoginDB.ExecuteNonQuery("TermUpdateFile", LoginDB.BuildNewUpdateFileParams(data, filecontent, accoID));
+            int otherupdatesuccess = LoginDB.ExecuteNonQuery("UpdateStorage", LoginDB.BuildNewUpdateStorageParams(accoID, Convert.ToInt32(data[4])));
+
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int remaining = LoginDB.ExecuteQuery("GetRemainingStorage", l);
+
+            return remaining;
+        }
+
+        [WebMethod]
+        public string[] GetAccountInfoWithEmail(string email)
+        {
+            return LoginDB.GetAccountInfo(email);
+        }
+
+        [WebMethod]
+        public DataSet GetFileData()
+        {
+            return LoginDB.GetFileData();
         }
     }
 }
