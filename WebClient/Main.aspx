@@ -11,27 +11,35 @@
     <div>
     
     </div>
-        <asp:Label ID="lblWelcome" runat="server" Font-Size="XX-Large" style="z-index: 1; left: 636px; top: 43px; position: absolute" Text="Welcome!" Font-Underline="True"></asp:Label>
+        <asp:Label ID="lblWelcome" runat="server" Font-Size="XX-Large" style="z-index: 1; left: 537px; top: 38px; position: absolute" Text="Welcome to the Test Page!" Font-Underline="True"></asp:Label>
                 <asp:Label ID="lblLoginValue" runat="server" ForeColor="Red"></asp:Label>
-        <asp:FileUpload ID="FileUpload" runat="server" style="z-index: 1; left: 130px; top: 369px; position: absolute" />
-        <asp:Label ID="lblUploadAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 184px; top: 325px; position: absolute" Text="Upload a File" Font-Bold="True"></asp:Label>
-        <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 261px; top: 417px; position: absolute; width: 87px" Text="Upload" />
-        <asp:Label ID="lblEnterAVerificationTokenTo" runat="server" Font-Underline="True" style="z-index: 1; left: 548px; top: 105px; position: absolute" Text="Enter a Verification Token to Complete an Action"></asp:Label>
-        <asp:Label ID="lblVerification" runat="server" style="z-index: 1; left: 549px; top: 171px; position: absolute" Text="Verification Token:"></asp:Label>
-        <asp:TextBox ID="txtVerificationToken" runat="server" style="z-index: 1; left: 678px; top: 171px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblDeleteAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 667px; top: 326px; position: absolute" Text="Delete a File" Font-Bold="True"></asp:Label>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 627px; top: 380px; position: absolute; height: 133px; width: 187px; right: 516px">
+        <asp:FileUpload ID="FileUpload" runat="server" style="z-index: 1; left: 143px; top: 241px; position: absolute" />
+        <asp:Label ID="lblUploadAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 204px; top: 193px; position: absolute" Text="Upload a File" Font-Bold="True"></asp:Label>
+        <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 271px; top: 288px; position: absolute; width: 87px" Text="Upload" />
+        <asp:Label ID="lblDeleteAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 475px; top: 198px; position: absolute" Text="Delete a File" Font-Bold="True"></asp:Label>
+        <asp:GridView ID="gvDelete" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 385px; top: 275px; position: absolute; height: 133px; width: 534px; right: 373px">
             <Columns>
                 <asp:TemplateField HeaderText="Select">
                     <ItemTemplate>
                         <asp:CheckBox ID="chkSelect" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField HeaderText="FileID" DataField="FileID" />
+                <asp:BoundField HeaderText="File Name" DataField="Name" />
+                <asp:BoundField HeaderText="File Type" DataField="FileType" />
+                <asp:BoundField HeaderText="Date Uploaded" DataField="DateUploaded" />
+                <asp:BoundField HeaderText="Date Modified" DataField="DateModified" />
+                <asp:BoundField HeaderText="File Size (in Bytes)" DataField="FileSize" />
             </Columns>
         </asp:GridView>
-        <asp:Label ID="lblNowUploadDeleteUpdate" runat="server" Font-Underline="True" style="z-index: 1; left: 579px; top: 243px; position: absolute" Text="Now Upload, Delete, or Update a file"></asp:Label>
-        <asp:Button ID="btnDelete" runat="server" style="z-index: 1; left: 759px; top: 542px; position: absolute" Text="Delete" />
-        <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 997px; top: 327px; position: absolute" Text="Modify"></asp:Label>
+        <asp:Button ID="btnDelete" runat="server" style="z-index: 1; left: 587px; top: 198px; position: absolute" Text="Delete" OnClick="btnDelete_Click" />
+        <asp:Label ID="lblUpdate" runat="server" style="z-index: 1; left: 1109px; top: 199px; position: absolute" Text="Update a File" Font-Bold="True" Font-Underline="True"></asp:Label>
+        <p>
+            <asp:Label ID="lblUploadASimple" runat="server" style="z-index: 1; left: 948px; top: 233px; position: absolute" Text="Upload a simple text file to modify one of the text files already stored"></asp:Label>
+            <asp:Button ID="btnUpdate" runat="server" style="z-index: 1; left: 1169px; top: 317px; position: absolute; width: 85px" Text="Update" OnClick="btnUpdate_Click" />
+        </p>
+        <asp:FileUpload ID="FileUploadModify" runat="server" style="z-index: 1; left: 1036px; top: 275px; position: absolute" />
+        <asp:Label ID="lblDeleteDescription" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 394px; top: 239px; position: absolute; width: 501px" Text="File Information for current User. Select one to delete. Don't delete FileID 33. That is for testing the Update a File Method."></asp:Label>
     </form>
 </body>
 </html>
