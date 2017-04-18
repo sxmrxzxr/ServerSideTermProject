@@ -136,9 +136,20 @@ namespace TermLibrary
             return accInfo;
         }
 
+        public static List<Param> BuildUpdateAccountParams(object[] param, int accoID)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("LastName", param[0], SqlDbType.VarChar));
+            p.Add(new Param("FirstName", param[1], SqlDbType.VarChar));
+            p.Add(new Param("Email", param[2], SqlDbType.VarChar));
+            p.Add(new Param("Passwd", param[3], SqlDbType.VarChar));
+            return p;
+        }
+
         public static DataSet GetAllAccounts()
         {
-            return objdb.GetDataSet("SELECT * FROM Accounts");
+            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)

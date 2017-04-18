@@ -123,6 +123,13 @@ namespace TermService
         }
 
         [WebMethod]
+        public int UpdateAccountInfo(object[] data, string token)
+        {
+            int accoID = GetAccountIDViaEmail(Convert.ToString(data[2]));
+            return LoginDB.ExecuteNonQuery("UpdateAccount", LoginDB.BuildUpdateAccountParams(data, accoID));
+        }
+
+        [WebMethod]
         public string[] GetAccountInfoWithEmail(string email)
         {
             return LoginDB.GetAccountInfo(email);
