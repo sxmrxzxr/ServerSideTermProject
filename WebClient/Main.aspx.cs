@@ -23,6 +23,8 @@ namespace WebClient
             {
                 gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
                 gvDelete.DataBind();
+                
+
             }
         }
 
@@ -38,9 +40,9 @@ namespace WebClient
                 if (FileUpload.HasFile)
                 {
                     fileSize = FileUpload.PostedFile.ContentLength;
-                    byte[] imageData = new byte[fileSize];
+                    byte[] fileData = new byte[fileSize];
 
-                    FileUpload.PostedFile.InputStream.Read(imageData, 0, fileSize);
+                    FileUpload.PostedFile.InputStream.Read(fileData, 0, fileSize);
                     fileName = FileUpload.PostedFile.FileName;
                  
                     fileExtension = fileName.Substring(fileName.LastIndexOf("."));
@@ -53,32 +55,37 @@ namespace WebClient
                     objArray[3] = DateTime.Now;
                     objArray[4] = fileSize;
 
-                    pxy.WriteNewFileToStorage(objArray, imageData, (string)Session["UserEmail"], "BADTOKEN");
+                    pxy.WriteNewFileToStorage(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
                 }
             }
             catch (Exception ex)
             {
                 Response.Write("Error" + ex.ToString());
             }
+            gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
+            gvDelete.DataBind();
+
         }
-        protected void btnModify_Click(object sender, EventArgs e)
+
+        //you can change the fileDataID and fileID to choose a different file to modify
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            int result = 0, fileSize;
-            string fileExtension, fileName;
+            int fileSize;
+            string fileName;
 
             try
             {
 
-                if (FileUpload.HasFile)
+                if (FileUploadModify.HasFile)
                 {
-                    fileSize = FileUpload.PostedFile.ContentLength;
-                    byte[] imageData = new byte[fileSize];
+                    fileSize = FileUploadModify.PostedFile.ContentLength;
+                    byte[] fileData = new byte[fileSize];
 
-                    FileUpload.PostedFile.InputStream.Read(imageData, 0, fileSize);
-                    fileName = FileUpload.PostedFile.FileName;
-
-                    int fileDataID = 18;
-                    int fileID = 34;
+                    FileUploadModify.PostedFile.InputStream.Read(fileData, 0, fileSize);
+                    fileName = FileUploadModify.PostedFile.FileName;
+                    //change these to choose a different file
+                    int fileDataID = 17;
+                    int fileID = 33;
 
                     object[] objArray = new object[7];
                     objArray[0] = fileDataID;
@@ -89,13 +96,15 @@ namespace WebClient
                     objArray[5] = DateTime.Now;
                     objArray[6] = true;
 
-                    pxy.UpdateFile(objArray, imageData, (string)Session["UserEmail"], "BADTOKEN");
+                    pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
                 }
             }
             catch (Exception ex)
             {
                 Response.Write("Error" + ex.ToString());
             }
+            gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
+            gvDelete.DataBind();
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -107,13 +116,18 @@ namespace WebClient
                 CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
                 if (CBox.Checked)
                 {
-                    int fileID = Convert.ToInt32(gvDelete.Rows[row].Cells[1]);
-                    int fileSize = Convert.ToInt32(gvDelete.Rows[row].Cells[6]);
+                    int fileID = Convert.ToInt32(gvDelete.Rows[row].Cells[1].Text);
+                    int fileSize = Convert.ToInt32(gvDelete.Rows[row].Cells[6].Text);
 
                     pxy.DeleteFile(fileID, fileSize, (string)Session["UserEmail"]);
                 }
 
             }
+            gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
+            gvDelete.DataBind();
+
         }
+
+        
     }
 }

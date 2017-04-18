@@ -94,13 +94,13 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Button btnDelete;
         
         /// <summary>
-        /// Label1 control.
+        /// lblUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblUpdate;
         
         /// <summary>
         /// lblUploadASimple control.
@@ -112,13 +112,13 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Label lblUploadASimple;
         
         /// <summary>
-        /// btnModify control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModify;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
         
         /// <summary>
         /// FileUploadModify control.
@@ -128,5 +128,14 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUploadModify;
+        
+        /// <summary>
+        /// lblDeleteDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeleteDescription;
     }
 }
