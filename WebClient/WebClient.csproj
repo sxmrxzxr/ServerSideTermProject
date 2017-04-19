@@ -108,10 +108,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\TermSVC\Reference.map">
+    <Content Include="Web References\TermSVC\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    </Content>
     <None Include="Web References\TermSVC\TermService.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -189,15 +189,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx">
+    <WebReferenceUrl Include="http://localhost:5393/TermService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
-      <UpdateFromURL>http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</UpdateFromURL>
-
+      <UpdateFromURL>http://localhost:5393/TermService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

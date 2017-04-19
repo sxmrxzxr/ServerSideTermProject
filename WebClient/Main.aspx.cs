@@ -148,8 +148,8 @@ namespace WebClient
             object[] accountArray = new object[4];
             accountArray[0] = txtFirstName.Text;
             accountArray[1] = txtLastName.Text;
-            accountArray[2] = txtEmail;
-            accountArray[3] = txtPassword;
+            accountArray[2] = txtEmail.Text;
+            accountArray[3] = txtPassword.Text;
             pxy.UpdateAccountInfo(accountArray,"BADPASS");
 
             txtFirstName.Text = "";
