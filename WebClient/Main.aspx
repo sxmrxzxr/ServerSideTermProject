@@ -40,6 +40,47 @@
         </p>
         <asp:FileUpload ID="FileUploadModify" runat="server" style="z-index: 1; left: 1036px; top: 275px; position: absolute" />
         <asp:Label ID="lblDeleteDescription" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 394px; top: 239px; position: absolute; width: 501px" Text="File Information for current User. Select one to delete. Don't delete FileID 33. That is for testing the Update a File Method."></asp:Label>
+        <asp:Label ID="lblUserUpdateAccount" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 180px; top: 607px; position: absolute" Text="User Update Account"></asp:Label>
+        <asp:Label ID="lblFirstName" runat="server" style="z-index: 1; left: 105px; top: 650px; position: absolute" Text="First Name:"></asp:Label>
+        <asp:Label ID="lblLastName" runat="server" style="z-index: 1; left: 104px; top: 693px; position: absolute" Text="Last Name:"></asp:Label>
+        <asp:Label ID="lblEmail" runat="server" style="z-index: 1; left: 134px; top: 731px; position: absolute" Text="Email:"></asp:Label>
+        <asp:Label ID="lblPassword" runat="server" style="z-index: 1; left: 105px; top: 774px; position: absolute" Text="Password:"></asp:Label>
+        <asp:TextBox ID="txtFirstName" runat="server" style="z-index: 1; left: 193px; top: 650px; position: absolute"></asp:TextBox>
+        <asp:TextBox ID="txtLastName" runat="server" style="z-index: 1; left: 193px; top: 693px; position: absolute"></asp:TextBox>
+        <asp:TextBox ID="txtEmail" runat="server" style="z-index: 1; left: 193px; top: 731px; position: absolute"></asp:TextBox>
+        <asp:TextBox ID="txtPassword" runat="server" style="z-index: 1; left: 193px; top: 776px; position: absolute"></asp:TextBox>
+        <asp:Button ID="btnUpdateAccount" runat="server" OnClick="btnUpdateAccount_Click" style="z-index: 1; left: 364px; top: 769px; position: absolute; height: 28px; width: 113px" Text="Update Account" />
+        <asp:Label ID="lblAdminUpdate" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 578px; top: 583px; position: absolute" Text="Admin Update/Delete Account"></asp:Label>
+        <asp:GridView ID="gvAdminDelete" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 561px; top: 668px; position: absolute; height: 145px; width: 407px">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkSelect2" runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" SortExpression="Email" />
+                <asp:BoundField DataField="Passwd" HeaderText="Password" ReadOnly="True" SortExpression="Passwd" />
+                <asp:BoundField DataField="Capacity" HeaderText="Storage Capacity" ReadOnly="True" SortExpression="Capacity" />
+            </Columns>
+        </asp:GridView>
+        <asp:TextBox ID="txtStorageCapacity" runat="server" style="z-index: 1; left: 1133px; top: 672px; position: absolute"></asp:TextBox>
+        <asp:TextBox ID="txtPassword2" runat="server" style="z-index: 1; left: 1135px; top: 714px; position: absolute"></asp:TextBox>
+        <asp:Label ID="lblStorageCapacity" runat="server" style="z-index: 1; left: 1001px; top: 675px; position: absolute" Text="Storage Capacity:"></asp:Label>
+        <asp:Label ID="lblPassword2" runat="server" style="z-index: 1; left: 1049px; top: 715px; position: absolute" Text="Password:"></asp:Label>
+        <asp:Label ID="lblSetNewValues" runat="server" Font-Underline="True" style="z-index: 1; left: 1034px; top: 637px; position: absolute" Text="Set new values for selected account"></asp:Label>
+        <asp:Button ID="btnUpdate2" runat="server" OnClick="btnUpdate2_Click" style="z-index: 1; left: 1202px; top: 752px; position: absolute" Text="Update" />
+        <asp:Button ID="btnDelete2" runat="server" OnClick="btnDelete2_Click" style="z-index: 1; left: 801px; top: 581px; position: absolute" Text="Delete" />
+        <asp:Label ID="lblAdminDeleteDescription" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 567px; top: 618px; position: absolute; width: 400px; height: 36px; margin-top: 6px" Text="Select one account. Then either delete or set new values for Storage Capacity and Password and then Update."></asp:Label>
+        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 110px; top: 866px; position: absolute" Text="Transactions For A Single User and a Time Period"></asp:Label>
+        <asp:GridView ID="gvTransactions" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 97px; top: 938px; position: absolute; height: 133px; width: 435px">
+            <Columns>
+                <asp:BoundField DataField="TransactionDateTime" HeaderText="Transaction Date and Time" ReadOnly="True" SortExpression="TransactionDateTime" />
+                <asp:BoundField DataField="UploadDownload" HeaderText="Upload/Download" ReadOnly="True" SortExpression="UploadDownload" />
+                <asp:BoundField DataField="FileID" HeaderText="File ID" ReadOnly="True" SortExpression="FileID" />
+                <asp:BoundField DataField="AccountID" HeaderText="Account ID" ReadOnly="True" SortExpression="AccountID" />
+            </Columns>
+        </asp:GridView>
+        <asp:Label ID="lblTransactionDescription" runat="server" ForeColor="Red" style="z-index: 1; left: 100px; top: 903px; position: absolute" Text="Time span and specific account are hard coded."></asp:Label>
     </form>
 </body>
 </html>

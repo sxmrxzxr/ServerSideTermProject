@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="HelloWorld">
@@ -104,6 +104,60 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AdminUpdateAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="capacity" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AdminUpdateAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AdminUpdateAccountInfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="start" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="end" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfAnyType" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateAccountInfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetAccountInfoWithEmail">
         <s:complexType>
           <s:sequence>
@@ -115,6 +169,20 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetAccountInfoWithEmailResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAccountWithEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAccountWithEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteAccountWithEmailResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -194,11 +262,35 @@
   <wsdl:message name="DeleteFileSoapOut">
     <wsdl:part name="parameters" element="tns:DeleteFileResponse" />
   </wsdl:message>
+  <wsdl:message name="AdminUpdateAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:AdminUpdateAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="AdminUpdateAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:AdminUpdateAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactions" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAccountInfoResponse" />
+  </wsdl:message>
   <wsdl:message name="GetAccountInfoWithEmailSoapIn">
     <wsdl:part name="parameters" element="tns:GetAccountInfoWithEmail" />
   </wsdl:message>
   <wsdl:message name="GetAccountInfoWithEmailSoapOut">
     <wsdl:part name="parameters" element="tns:GetAccountInfoWithEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAccountWithEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAccountWithEmail" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAccountWithEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAccountWithEmailResponse" />
   </wsdl:message>
   <wsdl:message name="GetAllAccountsSoapIn">
     <wsdl:part name="parameters" element="tns:GetAllAccounts" />
@@ -237,9 +329,25 @@
       <wsdl:input message="tns:DeleteFileSoapIn" />
       <wsdl:output message="tns:DeleteFileSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AdminUpdateAccountInfo">
+      <wsdl:input message="tns:AdminUpdateAccountInfoSoapIn" />
+      <wsdl:output message="tns:AdminUpdateAccountInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactions">
+      <wsdl:input message="tns:GetTransactionsSoapIn" />
+      <wsdl:output message="tns:GetTransactionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <wsdl:input message="tns:UpdateAccountInfoSoapIn" />
+      <wsdl:output message="tns:UpdateAccountInfoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetAccountInfoWithEmail">
       <wsdl:input message="tns:GetAccountInfoWithEmailSoapIn" />
       <wsdl:output message="tns:GetAccountInfoWithEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccountWithEmail">
+      <wsdl:input message="tns:DeleteAccountWithEmailSoapIn" />
+      <wsdl:output message="tns:DeleteAccountWithEmailSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetAllAccounts">
       <wsdl:input message="tns:GetAllAccountsSoapIn" />
@@ -306,8 +414,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AdminUpdateAccountInfo">
+      <soap:operation soapAction="http://tempuri.org/AdminUpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactions">
+      <soap:operation soapAction="http://tempuri.org/GetTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAccountInfoWithEmail">
       <soap:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccountWithEmail">
+      <soap:operation soapAction="http://tempuri.org/DeleteAccountWithEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -390,8 +534,44 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AdminUpdateAccountInfo">
+      <soap12:operation soapAction="http://tempuri.org/AdminUpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactions">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAccountInfoWithEmail">
       <soap12:operation soapAction="http://tempuri.org/GetAccountInfoWithEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccountWithEmail">
+      <soap12:operation soapAction="http://tempuri.org/DeleteAccountWithEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -420,10 +600,10 @@
   </wsdl:binding>
   <wsdl:service name="TermService">
     <wsdl:port name="TermServiceSoap" binding="tns:TermServiceSoap">
-      <soap:address location="http://localhost:4608/TermService.asmx" />
+      <soap:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
     </wsdl:port>
     <wsdl:port name="TermServiceSoap12" binding="tns:TermServiceSoap12">
-      <soap12:address location="http://localhost:4608/TermService.asmx" />
+      <soap12:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -23,6 +23,22 @@ namespace WebClient
             {
                 gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
                 gvDelete.DataBind();
+
+                gvAdminDelete.DataSource = pxy.GetAllAccounts();
+                gvAdminDelete.DataBind();
+
+                DateTime start = new DateTime(2017, 4, 18);
+                DateTime end = DateTime.Now;
+                gvTransactions.DataSource = pxy.GetTransactions(start, end, (string)Session["UserEmail"]);
+                gvTransactions.DataBind();
+
+                string[] accountInfo = new string[4];
+                accountInfo = pxy.GetAccountInfoWithEmail((string)Session["UserEmail"]);
+                txtFirstName.Text = accountInfo[0];
+                txtLastName.Text = accountInfo[1];
+                txtEmail.Text = accountInfo[2];
+                txtPassword.Text = accountInfo[3];
+
             }
         }
 
@@ -126,6 +142,63 @@ namespace WebClient
 
         }
 
-        
+        protected void btnUpdateAccount_Click(object sender, EventArgs e)
+        {
+            object[] accountArray = new object[4];
+            accountArray[0] = txtFirstName.Text;
+            accountArray[1] = txtLastName.Text;
+            accountArray[2] = txtEmail;
+            accountArray[3] = txtPassword;
+            pxy.UpdateAccountInfo(accountArray,"BADPASS");
+
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            txtEmail.Text = "";
+            txtPassword.Text = "";
+
+            gvAdminDelete.DataSource = pxy.GetAllAccounts();
+            gvAdminDelete.DataBind();
+        }
+
+        protected void btnDelete2_Click(object sender, EventArgs e)
+        {
+            for (int row = 0; row < gvAdminDelete.Rows.Count; row++)
+            {
+
+                CheckBox CBox;
+                CBox = (CheckBox)gvAdminDelete.Rows[row].FindControl("chkSelect2");
+                if (CBox.Checked)
+                {
+                    string email = gvAdminDelete.Rows[row].Cells[1].Text;
+                    pxy.DeleteAccountWithEmail(email);
+                }
+
+            }
+            gvAdminDelete.DataSource = pxy.GetAllAccounts();
+            gvAdminDelete.DataBind();
+        }
+
+        protected void btnUpdate2_Click(object sender, EventArgs e)
+        {
+            for (int row = 0; row < gvAdminDelete.Rows.Count; row++)
+            {
+
+                CheckBox CBox;
+                CBox = (CheckBox)gvAdminDelete.Rows[row].FindControl("chkSelect2");
+                if (CBox.Checked)
+                {
+                    string email = gvAdminDelete.Rows[row].Cells[1].Text;
+                    int capacity = Convert.ToInt32(txtStorageCapacity.Text);
+                    string password = txtPassword2.Text;
+                    pxy.AdminUpdateAccountInfo(email, capacity, password);
+                }
+
+            }
+            txtPassword2.Text = "";
+            txtStorageCapacity.Text = "";
+
+            gvAdminDelete.DataSource = pxy.GetAllAccounts();
+            gvAdminDelete.DataBind();
+        }
     }
 }
