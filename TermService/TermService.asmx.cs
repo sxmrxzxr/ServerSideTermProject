@@ -123,9 +123,48 @@ namespace TermService
         }
 
         [WebMethod]
+        public int AdminUpdateAccountInfo(string email, int capacity, string password)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("Capacity", capacity, SqlDbType.Int));
+            p.Add(new Param("Passwd", password, SqlDbType.VarChar));
+            return LoginDB.ExecuteNonQuery("AdminUpdateAccount", p);
+        }
+
+        [WebMethod]
+        public DataSet GetTransactions(DateTime start, DateTime end, string email)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> p = new List<Param>();
+            p.Add(new Param("StartTime", start, SqlDbType.DateTime));
+            p.Add(new Param("EndTime", end, SqlDbType.DateTime));
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return LoginDB.GetTransactions(p);
+        }
+
+        [WebMethod]
+        public int UpdateAccountInfo(object[] data, string token)
+        {
+
+            int accoID = GetAccountIDViaEmail(Convert.ToString(data[2]));
+            return LoginDB.ExecuteNonQuery("UpdateAccount", LoginDB.BuildUpdateAccountParams(data, accoID));
+        }
+
+        [WebMethod]
         public string[] GetAccountInfoWithEmail(string email)
         {
             return LoginDB.GetAccountInfo(email);
+        }
+
+        [WebMethod]
+        public int DeleteAccountWithEmail(string email)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return LoginDB.ExecuteNonQuery("DeleteAccount", l);
         }
 
         [WebMethod]

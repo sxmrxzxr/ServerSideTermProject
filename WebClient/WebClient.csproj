@@ -189,6 +189,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +197,7 @@
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
       <UpdateFromURL>http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</UpdateFromURL>
+
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

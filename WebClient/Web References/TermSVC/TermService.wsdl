@@ -600,10 +600,12 @@
   </wsdl:binding>
   <wsdl:service name="TermService">
     <wsdl:port name="TermServiceSoap" binding="tns:TermServiceSoap">
+
       <soap:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
     </wsdl:port>
     <wsdl:port name="TermServiceSoap12" binding="tns:TermServiceSoap12">
       <soap12:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
+
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
