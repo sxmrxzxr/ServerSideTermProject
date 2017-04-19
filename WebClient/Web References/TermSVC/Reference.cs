@@ -43,7 +43,15 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback DeleteFileOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AdminUpdateAccountInfoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTransactionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateAccountInfoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetAccountInfoWithEmailOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeleteAccountWithEmailOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAllAccountsOperationCompleted;
         
@@ -106,7 +114,19 @@ namespace WebClient.TermSVC {
         public event DeleteFileCompletedEventHandler DeleteFileCompleted;
         
         /// <remarks/>
+        public event AdminUpdateAccountInfoCompletedEventHandler AdminUpdateAccountInfoCompleted;
+        
+        /// <remarks/>
+        public event GetTransactionsCompletedEventHandler GetTransactionsCompleted;
+        
+        /// <remarks/>
+        public event UpdateAccountInfoCompletedEventHandler UpdateAccountInfoCompleted;
+        
+        /// <remarks/>
         public event GetAccountInfoWithEmailCompletedEventHandler GetAccountInfoWithEmailCompleted;
+        
+        /// <remarks/>
+        public event DeleteAccountWithEmailCompletedEventHandler DeleteAccountWithEmailCompleted;
         
         /// <remarks/>
         public event GetAllAccountsCompletedEventHandler GetAllAccountsCompleted;
@@ -311,6 +331,103 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AdminUpdateAccountInfo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int AdminUpdateAccountInfo(string email, int capacity, string password) {
+            object[] results = this.Invoke("AdminUpdateAccountInfo", new object[] {
+                        email,
+                        capacity,
+                        password});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password) {
+            this.AdminUpdateAccountInfoAsync(email, capacity, password, null);
+        }
+        
+        /// <remarks/>
+        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password, object userState) {
+            if ((this.AdminUpdateAccountInfoOperationCompleted == null)) {
+                this.AdminUpdateAccountInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAdminUpdateAccountInfoOperationCompleted);
+            }
+            this.InvokeAsync("AdminUpdateAccountInfo", new object[] {
+                        email,
+                        capacity,
+                        password}, this.AdminUpdateAccountInfoOperationCompleted, userState);
+        }
+        
+        private void OnAdminUpdateAccountInfoOperationCompleted(object arg) {
+            if ((this.AdminUpdateAccountInfoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AdminUpdateAccountInfoCompleted(this, new AdminUpdateAccountInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTransactions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetTransactions(System.DateTime start, System.DateTime end, string email) {
+            object[] results = this.Invoke("GetTransactions", new object[] {
+                        start,
+                        end,
+                        email});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTransactionsAsync(System.DateTime start, System.DateTime end, string email) {
+            this.GetTransactionsAsync(start, end, email, null);
+        }
+        
+        /// <remarks/>
+        public void GetTransactionsAsync(System.DateTime start, System.DateTime end, string email, object userState) {
+            if ((this.GetTransactionsOperationCompleted == null)) {
+                this.GetTransactionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTransactionsOperationCompleted);
+            }
+            this.InvokeAsync("GetTransactions", new object[] {
+                        start,
+                        end,
+                        email}, this.GetTransactionsOperationCompleted, userState);
+        }
+        
+        private void OnGetTransactionsOperationCompleted(object arg) {
+            if ((this.GetTransactionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTransactionsCompleted(this, new GetTransactionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateAccountInfo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int UpdateAccountInfo(object[] data, string token) {
+            object[] results = this.Invoke("UpdateAccountInfo", new object[] {
+                        data,
+                        token});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateAccountInfoAsync(object[] data, string token) {
+            this.UpdateAccountInfoAsync(data, token, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateAccountInfoAsync(object[] data, string token, object userState) {
+            if ((this.UpdateAccountInfoOperationCompleted == null)) {
+                this.UpdateAccountInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateAccountInfoOperationCompleted);
+            }
+            this.InvokeAsync("UpdateAccountInfo", new object[] {
+                        data,
+                        token}, this.UpdateAccountInfoOperationCompleted, userState);
+        }
+        
+        private void OnUpdateAccountInfoOperationCompleted(object arg) {
+            if ((this.UpdateAccountInfoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateAccountInfoCompleted(this, new UpdateAccountInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAccountInfoWithEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string[] GetAccountInfoWithEmail(string email) {
             object[] results = this.Invoke("GetAccountInfoWithEmail", new object[] {
@@ -336,6 +453,35 @@ namespace WebClient.TermSVC {
             if ((this.GetAccountInfoWithEmailCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAccountInfoWithEmailCompleted(this, new GetAccountInfoWithEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeleteAccountWithEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int DeleteAccountWithEmail(string email) {
+            object[] results = this.Invoke("DeleteAccountWithEmail", new object[] {
+                        email});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeleteAccountWithEmailAsync(string email) {
+            this.DeleteAccountWithEmailAsync(email, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteAccountWithEmailAsync(string email, object userState) {
+            if ((this.DeleteAccountWithEmailOperationCompleted == null)) {
+                this.DeleteAccountWithEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteAccountWithEmailOperationCompleted);
+            }
+            this.InvokeAsync("DeleteAccountWithEmail", new object[] {
+                        email}, this.DeleteAccountWithEmailOperationCompleted, userState);
+        }
+        
+        private void OnDeleteAccountWithEmailOperationCompleted(object arg) {
+            if ((this.DeleteAccountWithEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteAccountWithEmailCompleted(this, new DeleteAccountWithEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -572,6 +718,84 @@ namespace WebClient.TermSVC {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void AdminUpdateAccountInfoCompletedEventHandler(object sender, AdminUpdateAccountInfoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AdminUpdateAccountInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AdminUpdateAccountInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetTransactionsCompletedEventHandler(object sender, GetTransactionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTransactionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTransactionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void UpdateAccountInfoCompletedEventHandler(object sender, UpdateAccountInfoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateAccountInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateAccountInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void GetAccountInfoWithEmailCompletedEventHandler(object sender, GetAccountInfoWithEmailCompletedEventArgs e);
     
     /// <remarks/>
@@ -592,6 +816,32 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void DeleteAccountWithEmailCompletedEventHandler(object sender, DeleteAccountWithEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeleteAccountWithEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeleteAccountWithEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }
