@@ -147,6 +147,23 @@ namespace TermLibrary
             return p;
         }
 
+        public static DataSet GetTransactions(List<Param> p)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetTransactionHistory";
+
+            foreach (Param x in p)
+            {
+                SqlParameter inputParam = new SqlParameter(x.paramName, x.paramVal);
+                inputParam.Direction = ParameterDirection.Input;
+                inputParam.SqlDbType = x.paramType;
+                objcmd.Parameters.Add(inputParam);
+            }
+
+            return objdb.GetDataSetUsingCmdObj(objcmd);
+        }
+
         public static DataSet GetAllAccounts()
         {
             return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID");
@@ -195,7 +212,6 @@ namespace TermLibrary
             DataSet results = objdb.GetDataSetUsingCmdObj(objcmd);
 
             return results;
-
         }
     }
 }
