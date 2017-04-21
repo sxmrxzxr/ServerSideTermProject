@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="Register.aspx" />
     <None Include="Web References\TermSVC\TermService.disco" />
+    <Content Include="UserMain.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +168,13 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserMain.aspx.cs">
+      <DependentUpon>UserMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserMain.aspx.designer.cs">
+      <DependentUpon>UserMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web References\TermSVC\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,7 +197,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +204,6 @@
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
       <UpdateFromURL>http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</UpdateFromURL>
-
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

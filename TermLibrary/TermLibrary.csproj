@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudStorage.cs" />
     <Compile Include="LoginDB.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
