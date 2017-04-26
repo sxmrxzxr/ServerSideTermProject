@@ -59,7 +59,7 @@ namespace WebClient
                 Response.Cookies.Add(myCookie);
                 Session["LoginCheck"] = 1;
                 Session["UserEmail"] = txtEmail.Text;
-                Response.Redirect("Main.aspx");
+                Response.Redirect("UserMain.aspx");
             }
         }
     }

@@ -22,5 +22,42 @@ namespace WebClient
                 gvDelete.DataBind();
             }
         }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            int fileSize;
+            string fileExtension, fileName;
+
+            try
+            {
+
+                if (FileUpload.HasFile)
+                {
+                    fileSize = FileUpload.PostedFile.ContentLength;
+                    byte[] fileData = new byte[fileSize];
+
+                    FileUpload.PostedFile.InputStream.Read(fileData, 0, fileSize);
+                    fileName = FileUpload.PostedFile.FileName;
+
+                    fileExtension = fileName.Substring(fileName.LastIndexOf("."));
+                    fileExtension = fileExtension.ToLower();
+
+                    object[] objArray = new object[5];
+                    objArray[0] = fileName;
+                    objArray[1] = fileExtension;
+                    objArray[2] = DateTime.Now;
+                    objArray[3] = DateTime.Now;
+                    objArray[4] = fileSize;
+
+                    pxy.WriteNewFileToStorage(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error" + ex.ToString());
+            }
+            gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
+            gvDelete.DataBind();
+        }
     }
 }
