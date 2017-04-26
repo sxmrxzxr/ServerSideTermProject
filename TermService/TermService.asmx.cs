@@ -187,5 +187,13 @@ namespace TermService
             int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
             return LoginDB.GetFile(fileId);
         }
+
+        [WebMethod]
+        public int DeleteStorate(string accEmail)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+            int numDeleted = LoginDB.ExecuteNonQuery("DeleteAccountStorate", accoID);
+            return numDeleted;
+        }
     }
 }
