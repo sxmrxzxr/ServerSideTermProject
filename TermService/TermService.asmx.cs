@@ -180,5 +180,12 @@ namespace TermService
             return LoginDB.GetFileData(id);
         }
 
+        [WebMethod]
+        public byte[] DownloadFile(int fileId, string accEmail, object[] data)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+            int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileID, accoID, data));
+            return LoginDB.GetFile(fileId);
+        }
     }
 }

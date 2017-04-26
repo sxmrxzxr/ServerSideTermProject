@@ -213,5 +213,20 @@ namespace TermLibrary
 
             return results;
         }
+
+        public static byte[] GetFile(int id)
+        {
+            objcmd = new SqlCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "GetFileContentWithFileID";
+
+            SqlParameter inputParam = new SqlParameter("AccountID", id);
+            inputParam.Direction = ParameterDirection.Input;
+            inputParam.SqlDbType = SqlDbType.Int;
+            objcmd.Parameters.Add(inputParam);
+
+            DataSet data = objdb.GetDataSetUsingCmdObj(objcmd);
+            return new byte[1] { Convert.ToByte(data.Tables[0].Rows[0][0]) };
+        }
     }
 }
