@@ -14,10 +14,9 @@ namespace TermLibrary
         string firstName, lastName, email, password;
         //Term Storage
         int capacity, filled;
-        //TermFileData
-        int fileDataID, fileID, fileSize;
-        DateTime dateUploaded, dateModified;
-        string name, fileType;
+        //File information array
+        object[] fileObjectArray;
+
 
         public int AccountID
         {
@@ -115,88 +114,6 @@ namespace TermLibrary
             }
         }
 
-        public int FileDataID
-        {
-            get
-            {
-                return fileDataID;
-            }
-            set
-            {
-                fileDataID = value;
-            }
-        }
-
-        public int FileID
-        {
-            get
-            {
-                return fileID;
-            }
-            set
-            {
-                fileID= value;
-            }
-        }
-
-        public int FileSize
-        {
-            get
-            {
-                return fileSize;
-            }
-            set
-            {
-                fileSize = value;
-            }
-        }
-
-        public DateTime DateModified
-        {
-            get
-            {
-                return dateModified;
-            }
-            set
-            {
-                dateModified = value;
-            }
-        }
-
-        public DateTime DateUploaded
-        {
-            get
-            {
-                return dateUploaded;
-            }
-            set
-            {
-                dateUploaded = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-
-        public string FileType
-        {
-            get
-            {
-                return fileType;
-            }
-            set
-            {
-                fileType = value;
-            }
-        }
+        
     }
 }
