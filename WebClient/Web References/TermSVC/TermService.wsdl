@@ -224,6 +224,37 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="DownloadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="accEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadFileResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncreaseStorageSize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncreaseStorageSizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IncreaseStorageSizeResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -304,6 +335,18 @@
   <wsdl:message name="GetFileDataSoapOut">
     <wsdl:part name="parameters" element="tns:GetFileDataResponse" />
   </wsdl:message>
+  <wsdl:message name="DownloadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
+  </wsdl:message>
+  <wsdl:message name="DownloadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IncreaseStorageSizeSoapIn">
+    <wsdl:part name="parameters" element="tns:IncreaseStorageSize" />
+  </wsdl:message>
+  <wsdl:message name="IncreaseStorageSizeSoapOut">
+    <wsdl:part name="parameters" element="tns:IncreaseStorageSizeResponse" />
+  </wsdl:message>
   <wsdl:portType name="TermServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -356,6 +399,14 @@
     <wsdl:operation name="GetFileData">
       <wsdl:input message="tns:GetFileDataSoapIn" />
       <wsdl:output message="tns:GetFileDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input message="tns:DownloadFileSoapIn" />
+      <wsdl:output message="tns:DownloadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <wsdl:input message="tns:IncreaseStorageSizeSoapIn" />
+      <wsdl:output message="tns:IncreaseStorageSizeSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TermServiceSoap" type="tns:TermServiceSoap">
@@ -470,6 +521,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetFileData">
       <soap:operation soapAction="http://tempuri.org/GetFileData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap:operation soapAction="http://tempuri.org/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <soap:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -597,15 +666,31 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap12:operation soapAction="http://tempuri.org/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <soap12:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="TermService">
     <wsdl:port name="TermServiceSoap" binding="tns:TermServiceSoap">
-
       <soap:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
     </wsdl:port>
     <wsdl:port name="TermServiceSoap12" binding="tns:TermServiceSoap12">
       <soap12:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
-
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

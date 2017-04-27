@@ -40,12 +40,12 @@
         </p>
         <asp:Button ID="btnDeleteSelected" runat="server" style="z-index: 1; left: 1082px; top: 428px; position: absolute; width: 174px" Text="Delete Selected File(s)" class="btn btn-success" OnClick="btnDeleteSelected_Click"/>
         <asp:Button ID="btnUploadUpdatedFile" runat="server" style="z-index: 1; left: 1082px; top: 617px; position: absolute; width: 174px" Text="Upload Updated File" class="btn btn-success" OnClick="btnUploadUpdatedFile_Click"/>
-        <asp:Label ID="btnUpdateAFile" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 934px; top: 486px; position: absolute; width: 436px; font-size: 150%; background-color: coral" Text="Update a File" class="label label-primary"></asp:Label>
+        <asp:Label ID="btnUpdateAFile" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 997px; top: 486px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Update a File" class="label label-primary"></asp:Label>
         <asp:Label ID="lblUpdateFirstSelected" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 1089px; top: 546px; position: absolute" Text="Update First Selected File"></asp:Label>
         <p>
         <asp:FileUpload ID="FileUploadModify" runat="server" style="z-index: 1; left: 1057px; top: 575px; position: absolute" />
-        <asp:Label ID="lblDeleteAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 934px; top: 354px; position: absolute; bottom: 311px; width: 74px; width: 436px; font-size: 150%; background-color: coral; height: 35px" Text="Delete a File" Font-Bold="True" class="label label-primary"></asp:Label>
-        <asp:Label ID="lblUploadAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 934px; top: 185px; position: absolute; width: 436px; font-size: 150%; background-color: coral" Text="Upload a File" Font-Bold="True" class="label label-primary"></asp:Label>
+        <asp:Label ID="lblDeleteAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 997px; top: 354px; position: absolute; bottom: 311px; width: 74px; width: 301px; font-size: 150%; background-color: coral; height: 35px" Text="Delete a File" Font-Bold="True" class="label label-primary"></asp:Label>
+        <asp:Label ID="lblUploadAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 997px; top: 187px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Upload a File" Font-Bold="True" class="label label-primary"></asp:Label>
         <asp:FileUpload ID="FileUpload" runat="server" style="z-index: 1; left: 1057px; top: 253px; position: absolute; right: 260px;" />
         </p>
     </form>
