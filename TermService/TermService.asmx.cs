@@ -189,6 +189,15 @@ namespace TermService
         }
 
         [WebMethod]
+        public int DeleteStorate(string accEmail)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int numDeleted = LoginDB.ExecuteNonQuery("DeleteAccountStorage", l);
+            return numDeleted;
+        }
+
         public int IncreaseStorageSize(string email, int newSize)
         {
             int accoID = GetAccountIDViaEmail(email);
