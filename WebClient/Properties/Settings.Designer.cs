@@ -26,7 +26,8 @@ namespace WebClient.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5393/TermService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService." +
+            "asmx")]
         public string WebClient_TermSVC_TermService {
             get {
                 return ((string)(this["WebClient_TermSVC_TermService"]));

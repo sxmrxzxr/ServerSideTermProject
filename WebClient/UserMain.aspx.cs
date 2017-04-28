@@ -84,7 +84,10 @@ namespace WebClient
         protected void btnUploadUpdatedFile_Click(object sender, EventArgs e)
         {
             int fileSize;
+            int fileDataID = 0;
+            int fileID = 0;
             string fileName;
+            string fileExtension;
 
             try
             {
@@ -96,11 +99,26 @@ namespace WebClient
 
                     FileUploadModify.PostedFile.InputStream.Read(fileData, 0, fileSize);
                     fileName = FileUploadModify.PostedFile.FileName;
-                    //change these to choose a different file
-                    int fileDataID = 17;
-                    int fileID = 33;
 
-                    object[] objArray = new object[7];
+                    fileExtension = fileName.Substring(fileName.LastIndexOf("."));
+                    fileExtension = fileExtension.ToLower();
+
+
+                    for (int row = 0; row < gvDelete.Rows.Count; row++)
+                    {
+                        CheckBox CBox;
+                        CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
+                        if (CBox.Checked)
+                        {
+                            fileID= Convert.ToInt32(gvDelete.Rows[row].Cells[1].Text);
+                            fileDataID = Convert.ToInt32(gvDelete.Rows[row].Cells[7].Text);
+                        }
+
+                    }
+                    
+                    
+
+                    object[] objArray = new object[8];
                     objArray[0] = fileDataID;
                     objArray[1] = fileID;
                     objArray[2] = fileName;
@@ -108,6 +126,7 @@ namespace WebClient
                     objArray[4] = fileSize;
                     objArray[5] = DateTime.Now;
                     objArray[6] = true;
+                    objArray[7] = fileExtension;
 
                     int x = pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
                     Response.Write(x);
@@ -119,6 +138,32 @@ namespace WebClient
             }
             gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
             gvDelete.DataBind();
+        }
+
+        protected void btnDownloadSelected_Click(object sender, EventArgs e)
+        {
+            string fileType;
+            string fileName;
+            for (int row = 0; row < gvDelete.Rows.Count; row++)
+            {
+
+                CheckBox CBox;
+                CBox = (CheckBox)gvDelete.Rows[row].FindControl("chkSelect");
+                if (CBox.Checked)
+                {
+                    object[] objArray = new object[10];
+                    byte[] fileData = pxy.DownloadFile(Convert.ToInt32(gvDelete.Rows[row].Cells[1].Text), (string)Session["UserEmail"], objArray);
+                    Response.Clear();
+                    //Response.ContentType = fileType;
+                    //Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName);
+                    Response.BinaryWrite(fileData.ToArray());
+                    Response.Flush();
+                    Response.Close();
+                    Response.End();
+                }
+
+            }
+            
         }
     }
 
