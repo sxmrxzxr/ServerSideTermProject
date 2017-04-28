@@ -198,13 +198,13 @@ namespace TermLibrary
             
         }
 
-        public static DataSet GetInactiveFiles(int fileID)
+        public static DataSet GetInactiveFiles(int accoID)
         {
             objcmd = new SqlCommand();
             objcmd.CommandType = CommandType.StoredProcedure;
             objcmd.CommandText = "GetInactiveFilesWithAccountID";
 
-            SqlParameter inputParam = new SqlParameter("AccountID", fileID);
+            SqlParameter inputParam = new SqlParameter("AccountID", accoID);
             inputParam.Direction = ParameterDirection.Input;
             inputParam.SqlDbType = SqlDbType.Int;
             objcmd.Parameters.Add(inputParam);
