@@ -240,18 +240,38 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="IncreaseStorageSize">
+      <s:element name="DeleteStorate">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="newSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="accEmail" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="IncreaseStorageSizeResponse">
+      <s:element name="DeleteStorateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="IncreaseStorageSizeResult" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteStorateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInactiveFiles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInactiveFilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInactiveFilesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -341,11 +361,17 @@
   <wsdl:message name="DownloadFileSoapOut">
     <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
   </wsdl:message>
-  <wsdl:message name="IncreaseStorageSizeSoapIn">
-    <wsdl:part name="parameters" element="tns:IncreaseStorageSize" />
+  <wsdl:message name="DeleteStorateSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStorate" />
   </wsdl:message>
-  <wsdl:message name="IncreaseStorageSizeSoapOut">
-    <wsdl:part name="parameters" element="tns:IncreaseStorageSizeResponse" />
+  <wsdl:message name="DeleteStorateSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStorateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInactiveFilesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInactiveFiles" />
+  </wsdl:message>
+  <wsdl:message name="GetInactiveFilesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInactiveFilesResponse" />
   </wsdl:message>
   <wsdl:portType name="TermServiceSoap">
     <wsdl:operation name="HelloWorld">
@@ -404,9 +430,13 @@
       <wsdl:input message="tns:DownloadFileSoapIn" />
       <wsdl:output message="tns:DownloadFileSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="IncreaseStorageSize">
-      <wsdl:input message="tns:IncreaseStorageSizeSoapIn" />
-      <wsdl:output message="tns:IncreaseStorageSizeSoapOut" />
+    <wsdl:operation name="DeleteStorate">
+      <wsdl:input message="tns:DeleteStorateSoapIn" />
+      <wsdl:output message="tns:DeleteStorateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInactiveFiles">
+      <wsdl:input message="tns:GetInactiveFilesSoapIn" />
+      <wsdl:output message="tns:GetInactiveFilesSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TermServiceSoap" type="tns:TermServiceSoap">
@@ -537,8 +567,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="IncreaseStorageSize">
-      <soap:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
+    <wsdl:operation name="DeleteStorate">
+      <soap:operation soapAction="http://tempuri.org/DeleteStorate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInactiveFiles">
+      <soap:operation soapAction="http://tempuri.org/GetInactiveFiles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -675,8 +714,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="IncreaseStorageSize">
-      <soap12:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
+    <wsdl:operation name="DeleteStorate">
+      <soap12:operation soapAction="http://tempuri.org/DeleteStorate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInactiveFiles">
+      <soap12:operation soapAction="http://tempuri.org/GetInactiveFiles" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -687,12 +735,10 @@
   </wsdl:binding>
   <wsdl:service name="TermService">
     <wsdl:port name="TermServiceSoap" binding="tns:TermServiceSoap">
-
-      <soap:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
+      <soap:address location="http://localhost:4608/TermService.asmx" />
     </wsdl:port>
     <wsdl:port name="TermServiceSoap12" binding="tns:TermServiceSoap12">
-      <soap12:address location="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" />
-
+      <soap12:address location="http://localhost:4608/TermService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

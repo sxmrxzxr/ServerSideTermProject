@@ -122,9 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Register.aspx" />
-    <None Include="Web References\TermSVC\TermService.disco" />
     <Content Include="TechSupportForum.aspx" />
     <Content Include="UserMain.aspx" />
+    <None Include="Web References\TermSVC\TermService.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -208,12 +208,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:5393/TermService.asmx">
+    <WebReferenceUrl Include="http://localhost:4608/TermService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TermSVC\</RelPath>
-
-      <UpdateFromURL>http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx</UpdateFromURL>
-
+      <UpdateFromURL>http://localhost:4608/TermService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

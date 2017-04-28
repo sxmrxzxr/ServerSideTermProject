@@ -59,7 +59,9 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback DownloadFileOperationCompleted;
         
-        private System.Threading.SendOrPostCallback IncreaseStorageSizeOperationCompleted;
+        private System.Threading.SendOrPostCallback DeleteStorateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInactiveFilesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -142,7 +144,10 @@ namespace WebClient.TermSVC {
         public event DownloadFileCompletedEventHandler DownloadFileCompleted;
         
         /// <remarks/>
-        public event IncreaseStorageSizeCompletedEventHandler IncreaseStorageSizeCompleted;
+        public event DeleteStorateCompletedEventHandler DeleteStorateCompleted;
+        
+        /// <remarks/>
+        public event GetInactiveFilesCompletedEventHandler GetInactiveFilesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -586,33 +591,60 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IncreaseStorageSize", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int IncreaseStorageSize(string email, int newSize) {
-            object[] results = this.Invoke("IncreaseStorageSize", new object[] {
-                        email,
-                        newSize});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeleteStorate", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int DeleteStorate(string accEmail) {
+            object[] results = this.Invoke("DeleteStorate", new object[] {
+                        accEmail});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void IncreaseStorageSizeAsync(string email, int newSize) {
-            this.IncreaseStorageSizeAsync(email, newSize, null);
+        public void DeleteStorateAsync(string accEmail) {
+            this.DeleteStorateAsync(accEmail, null);
         }
         
         /// <remarks/>
-        public void IncreaseStorageSizeAsync(string email, int newSize, object userState) {
-            if ((this.IncreaseStorageSizeOperationCompleted == null)) {
-                this.IncreaseStorageSizeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIncreaseStorageSizeOperationCompleted);
+        public void DeleteStorateAsync(string accEmail, object userState) {
+            if ((this.DeleteStorateOperationCompleted == null)) {
+                this.DeleteStorateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteStorateOperationCompleted);
             }
-            this.InvokeAsync("IncreaseStorageSize", new object[] {
-                        email,
-                        newSize}, this.IncreaseStorageSizeOperationCompleted, userState);
+            this.InvokeAsync("DeleteStorate", new object[] {
+                        accEmail}, this.DeleteStorateOperationCompleted, userState);
         }
         
-        private void OnIncreaseStorageSizeOperationCompleted(object arg) {
-            if ((this.IncreaseStorageSizeCompleted != null)) {
+        private void OnDeleteStorateOperationCompleted(object arg) {
+            if ((this.DeleteStorateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IncreaseStorageSizeCompleted(this, new IncreaseStorageSizeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.DeleteStorateCompleted(this, new DeleteStorateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetInactiveFiles", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetInactiveFiles(int fileID) {
+            object[] results = this.Invoke("GetInactiveFiles", new object[] {
+                        fileID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInactiveFilesAsync(int fileID) {
+            this.GetInactiveFilesAsync(fileID, null);
+        }
+        
+        /// <remarks/>
+        public void GetInactiveFilesAsync(int fileID, object userState) {
+            if ((this.GetInactiveFilesOperationCompleted == null)) {
+                this.GetInactiveFilesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInactiveFilesOperationCompleted);
+            }
+            this.InvokeAsync("GetInactiveFiles", new object[] {
+                        fileID}, this.GetInactiveFilesOperationCompleted, userState);
+        }
+        
+        private void OnGetInactiveFilesOperationCompleted(object arg) {
+            if ((this.GetInactiveFilesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInactiveFilesCompleted(this, new GetInactiveFilesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1001,17 +1033,17 @@ namespace WebClient.TermSVC {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
-    public delegate void IncreaseStorageSizeCompletedEventHandler(object sender, IncreaseStorageSizeCompletedEventArgs e);
+    public delegate void DeleteStorateCompletedEventHandler(object sender, DeleteStorateCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IncreaseStorageSizeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class DeleteStorateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal IncreaseStorageSizeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal DeleteStorateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1021,6 +1053,32 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetInactiveFilesCompletedEventHandler(object sender, GetInactiveFilesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInactiveFilesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInactiveFilesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

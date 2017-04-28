@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-
-  <contractRef ref="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx?wsdl" docRef="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" xmlns:q1="http://tempuri.org/" binding="q1:TermServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://cis-iis2.temple.edu/Spring2017/CIS3342_tue95606/TermProjectWS/TermService.asmx" xmlns:q2="http://tempuri.org/" binding="q2:TermServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-
+  <contractRef ref="http://localhost:4608/TermService.asmx?wsdl" docRef="http://localhost:4608/TermService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost:4608/TermService.asmx" xmlns:q1="http://tempuri.org/" binding="q1:TermServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost:4608/TermService.asmx" xmlns:q2="http://tempuri.org/" binding="q2:TermServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
 </discovery>
