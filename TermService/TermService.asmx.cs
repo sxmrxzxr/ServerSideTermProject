@@ -180,5 +180,38 @@ namespace TermService
             return LoginDB.GetFileData(id);
         }
 
+        [WebMethod]
+        public byte[] DownloadFile(int fileId, string accEmail, object[] data)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+            int transactionsuccess = LoginDB.ExecuteNonQuery("NewFileTransaction", LoginDB.BuildNewTransactionParams(fileId, accoID, data));
+            return LoginDB.GetFile(fileId);
+        }
+
+        [WebMethod]
+        public int DeleteStorate(string accEmail)
+        {
+            int accoID = GetAccountIDViaEmail(accEmail);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int numDeleted = LoginDB.ExecuteNonQuery("DeleteAccountStorage", l);
+            return numDeleted;
+        }
+
+        public int IncreaseStorageSize(string email, int newSize)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            l.Add(new Param("Capacity", newSize, SqlDbType.Int));
+            int success = LoginDB.ExecuteNonQuery("IncreaseStorageCapacity", l);
+            return success;
+        }
+        
+        [WebMethod] 
+        public DataSet GetInactiveFiles(int fileID)
+        {
+            return LoginDB.GetInactiveFiles(fileID);
+        }
     }
 }

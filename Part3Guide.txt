@@ -1,0 +1,73 @@
+----------------------------------------------------------User-------------------------------------------------------------------
+
+-view their entire cloud
+	 o files and file data including an image that represents the type of file
+
+-download files
+
+-delete files
+
+-upload newer versions of a file
+
+-clear the entire storage
+
+-synchronize their storage at any time
+	o involves updating the database to reflect changes made to the in RAM data 
+	  structure representing the cloud user’s storage (Cloud Storage object)
+
+
+-restore deleted files and older versions of files
+	o view their trash bin and restore deleted files
+	o view older versions of files and restore them
+	o this utility should be part of a separate ASPX page and not part of the normal set of operations 
+
+-Record the cloud user’s operations in your database each time they make a change
+
+-Logout user(end session)
+	o use the Global.asax to write the Cloud Storage object to the database using serialization
+	o synchronize the Cloud Storage object’s changes with the physical storage in the database
+
+-Load user's cloud storage object from serialized data stored in the database upon a successful login
+	o if data doesn't exist, create an empty object
+
+-View pricing plans
+
+-Purchase more storage
+	o Utilize credit-card web service 
+
+
+-----------------------------------------------------------Admin---------------------------------------------------------------
+
+-view cloud user accounts
+
+-modify accounts
+	o reset passwords
+
+-delete accounts
+
+-view cloud users' files
+
+-Store all admin operations as a log
+
+--------------------------------------------------------Super-Admins-----------------------------------------------------------
+
+-Manage other admin accounts
+
+-view logs of admin operations based on specific admin or time period for all admins
+
+-------------------------------------------------------Tech Support--------------------------------------------
+
+-Users get help from cloud admins
+	o question/answer forum
+	o users post questions/ receive answers from cloud admins
+
+------------------------------------------------------Additional Requirements-------------------------------------
+
+-Utilize AJAX(different from class examples)
+
+-Utilize 2 Custome User Controls (ASCX) (different from class examples)
+
+-CSS styling
+
+
+
