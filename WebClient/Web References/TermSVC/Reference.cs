@@ -57,6 +57,10 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback GetFileDataOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DownloadFileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback IncreaseStorageSizeOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -133,6 +137,12 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         public event GetFileDataCompletedEventHandler GetFileDataCompleted;
+        
+        /// <remarks/>
+        public event DownloadFileCompletedEventHandler DownloadFileCompleted;
+        
+        /// <remarks/>
+        public event IncreaseStorageSizeCompletedEventHandler IncreaseStorageSizeCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -542,6 +552,71 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DownloadFile", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] DownloadFile(int fileId, string accEmail, object[] data) {
+            object[] results = this.Invoke("DownloadFile", new object[] {
+                        fileId,
+                        accEmail,
+                        data});
+            return ((byte[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DownloadFileAsync(int fileId, string accEmail, object[] data) {
+            this.DownloadFileAsync(fileId, accEmail, data, null);
+        }
+        
+        /// <remarks/>
+        public void DownloadFileAsync(int fileId, string accEmail, object[] data, object userState) {
+            if ((this.DownloadFileOperationCompleted == null)) {
+                this.DownloadFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDownloadFileOperationCompleted);
+            }
+            this.InvokeAsync("DownloadFile", new object[] {
+                        fileId,
+                        accEmail,
+                        data}, this.DownloadFileOperationCompleted, userState);
+        }
+        
+        private void OnDownloadFileOperationCompleted(object arg) {
+            if ((this.DownloadFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DownloadFileCompleted(this, new DownloadFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IncreaseStorageSize", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int IncreaseStorageSize(string email, int newSize) {
+            object[] results = this.Invoke("IncreaseStorageSize", new object[] {
+                        email,
+                        newSize});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void IncreaseStorageSizeAsync(string email, int newSize) {
+            this.IncreaseStorageSizeAsync(email, newSize, null);
+        }
+        
+        /// <remarks/>
+        public void IncreaseStorageSizeAsync(string email, int newSize, object userState) {
+            if ((this.IncreaseStorageSizeOperationCompleted == null)) {
+                this.IncreaseStorageSizeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIncreaseStorageSizeOperationCompleted);
+            }
+            this.InvokeAsync("IncreaseStorageSize", new object[] {
+                        email,
+                        newSize}, this.IncreaseStorageSizeOperationCompleted, userState);
+        }
+        
+        private void OnIncreaseStorageSizeOperationCompleted(object arg) {
+            if ((this.IncreaseStorageSizeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IncreaseStorageSizeCompleted(this, new IncreaseStorageSizeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -894,6 +969,58 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void DownloadFileCompletedEventHandler(object sender, DownloadFileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DownloadFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DownloadFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void IncreaseStorageSizeCompletedEventHandler(object sender, IncreaseStorageSizeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IncreaseStorageSizeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IncreaseStorageSizeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }

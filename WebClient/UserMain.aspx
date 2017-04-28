@@ -1,3 +1,4 @@
+
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserMain.aspx.cs" Inherits="WebClient.UserMain" %>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     <div>
     
     </div>
-        <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Font-Underline="True" style="z-index: 1; left: 242px; top: 124px; position: absolute; height: 29px; width: 170px; font-size: 150%; background-color: #50ffd7" Text="RizerBox" class="label label-primary"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Font-Underline="True" style="z-index: 1; left: 242px; top: 124px; position: absolute; height: 29px; width: 170px; font-size: 150%; background-color: #0080af" Text="RizerBox" class="label label-primary"></asp:Label>
         <asp:GridView class="table table-bordered table-hover" ID="gvDelete" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 239px; top: 192px; position: absolute; height: 175px; width: 637px; right: 414px">
             <Columns>
                 <asp:TemplateField HeaderText="Select">
@@ -36,10 +37,10 @@
             </Columns>
         </asp:GridView>
         <p>
-        <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 1082px; top: 298px; position: absolute; width: 174px" Text="Upload" class="btn btn-success"/>
+        <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 1082px; top: 298px; position: absolute; width: 174px; background: #0080af" Text="Upload" class="btn btn-success"/>
         </p>
-        <asp:Button ID="btnDeleteSelected" runat="server" style="z-index: 1; left: 1082px; top: 428px; position: absolute; width: 174px" Text="Delete Selected File(s)" class="btn btn-success" OnClick="btnDeleteSelected_Click"/>
-        <asp:Button ID="btnUploadUpdatedFile" runat="server" style="z-index: 1; left: 1082px; top: 617px; position: absolute; width: 174px" Text="Upload Updated File" class="btn btn-success" OnClick="btnUploadUpdatedFile_Click"/>
+        <asp:Button ID="btnDeleteSelected" runat="server" style="z-index: 1; left: 1082px; top: 428px; position: absolute; width: 174px; background: #0080af" Text="Delete Selected File(s)" class="btn btn-success" OnClick="btnDeleteSelected_Click"/>
+        <asp:Button ID="btnUploadUpdatedFile" runat="server" style="z-index: 1; left: 1082px; top: 617px; position: absolute; width: 174px; background: #0080af" Text="Upload Updated File" class="btn btn-success" OnClick="btnUploadUpdatedFile_Click"/>
         <asp:Label ID="btnUpdateAFile" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 997px; top: 486px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Update a File" class="label label-primary"></asp:Label>
         <asp:Label ID="lblUpdateFirstSelected" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 1089px; top: 546px; position: absolute" Text="Update First Selected File"></asp:Label>
         <p>
