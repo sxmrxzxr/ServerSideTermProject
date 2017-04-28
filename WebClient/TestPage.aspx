@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="WebClient.Main" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPage.aspx.cs" Inherits="WebClient.Main" %>
 
 <!DOCTYPE html>
 
@@ -17,7 +17,7 @@
         <asp:Label ID="lblUploadAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 204px; top: 193px; position: absolute" Text="Upload a File" Font-Bold="True"></asp:Label>
         <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 271px; top: 288px; position: absolute; width: 87px" Text="Upload" />
         <asp:Label ID="lblDeleteAFile" runat="server" Font-Underline="True" style="z-index: 1; left: 475px; top: 198px; position: absolute" Text="Delete a File" Font-Bold="True"></asp:Label>
-        <asp:GridView ID="gvDelete" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 385px; top: 275px; position: absolute; height: 133px; width: 534px; right: 373px">
+        <asp:GridView ID="gvDelete" runat="server" AutoGenerateColumns="False" style="z-index: 1; left: 385px; top: 275px; position: absolute; height: 133px; width: 534px; ">
             <Columns>
                 <asp:TemplateField HeaderText="Select">
                     <ItemTemplate>
