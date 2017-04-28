@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -148,8 +148,8 @@ namespace WebClient
             object[] accountArray = new object[4];
             accountArray[0] = txtFirstName.Text;
             accountArray[1] = txtLastName.Text;
-            accountArray[2] = txtEmail.Text;
-            accountArray[3] = txtPassword.Text;
+            accountArray[2] = txtEmail;
+            accountArray[3] = txtPassword;
             pxy.UpdateAccountInfo(accountArray,"BADPASS");
 
             txtFirstName.Text = "";
