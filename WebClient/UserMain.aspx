@@ -26,8 +26,8 @@
         <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" style="z-index: 1; left: 1082px; top: 298px; position: absolute; width: 174px; background: #0080af" Text="Upload" class="btn btn-success"/>
         </p>
         <asp:Button ID="btnDeleteSelected" runat="server" style="z-index: 1; left: 1082px; top: 428px; position: absolute; width: 174px; background: #0080af" Text="Delete Selected File(s)" class="btn btn-success" OnClick="btnDeleteSelected_Click"/>
-        <asp:Button ID="btnDownloadSelected" runat="server" style="z-index: 1; left: 1065px; top: 754px; position: absolute; width: 199px; background: #0080af" Text="Download Selected File(s)" class="btn btn-success" OnClick="btnDownloadSelected_Click"/>
-        <asp:Label ID="btnDownloadAFile" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 997px; top: 684px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Download a File" class="label label-primary"></asp:Label>
+        <asp:Button ID="btnClearStorage" runat="server" style="z-index: 1; left: 649px; top: 761px; position: absolute; width: 199px; background: #0080af" Text="Clear All" class="btn btn-success" OnClick="btnClearStorage_Click"/>
+        <asp:Label ID="btnDownloadAFile" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 1004px; top: 684px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Download a File" class="label label-primary"></asp:Label>
         <asp:Label ID="lblUpdateFirstSelected" runat="server" Font-Size="Small" ForeColor="Red" style="z-index: 1; left: 1089px; top: 546px; position: absolute" Text="Update First Selected File"></asp:Label>
         <p>
         <asp:FileUpload ID="FileUploadModify" runat="server" style="z-index: 1; left: 1057px; top: 575px; position: absolute" />
@@ -36,6 +36,10 @@
         <asp:FileUpload ID="FileUpload" runat="server" style="z-index: 1; left: 1057px; top: 253px; position: absolute; right: 260px;" />
         <asp:Label ID="btnUpdateAFile0" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 997px; top: 486px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Update a File" class="label label-primary"></asp:Label>
         <asp:Button ID="btnUploadUpdatedFile0" runat="server" style="z-index: 1; left: 1082px; top: 617px; position: absolute; width: 174px; background: #0080af" Text="Upload Updated File" class="btn btn-success" OnClick="btnUploadUpdatedFile_Click"/>
+        <asp:Label ID="lblClearStorage" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 562px; top: 685px; position: absolute; width: 301px; font-size: 150%; background-color: coral" Text="Clear Storage" class="label label-primary"></asp:Label>
+        </p>
+    <p>
+        <asp:Button ID="btnDownloadSelected0" runat="server" style="z-index: 1; left: 1065px; top: 754px; position: absolute; width: 199px; background: #0080af" Text="Download Selected File(s)" class="btn btn-success" OnClick="btnDownloadSelected_Click"/>
         </p>
     </form>
 </body>

@@ -198,6 +198,7 @@ namespace TermService
             return numDeleted;
         }
 
+        [WebMethod]
         public int IncreaseStorageSize(string email, int newSize)
         {
             int accoID = GetAccountIDViaEmail(email);

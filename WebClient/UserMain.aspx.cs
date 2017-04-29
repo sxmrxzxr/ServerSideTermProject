@@ -169,6 +169,13 @@ namespace WebClient
             }
             
         }
+
+        protected void btnClearStorage_Click(object sender, EventArgs e)
+        {
+            int numdeleted = pxy.DeleteStorage((string)Session["UserEmail"]);
+            gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
+            gvDelete.DataBind();
+        }
     }
 
 }
