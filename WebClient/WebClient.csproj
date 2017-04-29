@@ -108,10 +108,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Web References\TermSVC\Reference.map">
+    <Content Include="UserRestore.aspx" />
+    <None Include="Web References\TermSVC\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="Web References\TermSVC\TermService.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -182,6 +183,13 @@
     </Compile>
     <Compile Include="UserMain.aspx.designer.cs">
       <DependentUpon>UserMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRestore.aspx.cs">
+      <DependentUpon>UserRestore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserRestore.aspx.designer.cs">
+      <DependentUpon>UserRestore.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web References\TermSVC\Reference.cs">
       <AutoGen>True</AutoGen>

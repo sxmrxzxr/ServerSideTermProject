@@ -217,5 +217,13 @@ namespace TermService
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return LoginDB.GetInactiveFiles(accoID);
         }
+
+        [WebMethod]
+        public int RestoreFile(int fileID)
+        {
+            List<Param> p = new List<Param>();
+            p.Add(new Param("FileID", fileID, SqlDbType.Int));
+            return LoginDB.ExecuteNonQuery("RestoreFile", p);
+        }
     }
 }

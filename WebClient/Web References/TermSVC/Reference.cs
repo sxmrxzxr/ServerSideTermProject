@@ -65,6 +65,8 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback GetInactiveFilesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback RestoreFileOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -153,6 +155,9 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         public event GetInactiveFilesCompletedEventHandler GetInactiveFilesCompleted;
+        
+        /// <remarks/>
+        public event RestoreFileCompletedEventHandler RestoreFileCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -685,6 +690,35 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RestoreFile", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int RestoreFile(int fileID) {
+            object[] results = this.Invoke("RestoreFile", new object[] {
+                        fileID});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RestoreFileAsync(int fileID) {
+            this.RestoreFileAsync(fileID, null);
+        }
+        
+        /// <remarks/>
+        public void RestoreFileAsync(int fileID, object userState) {
+            if ((this.RestoreFileOperationCompleted == null)) {
+                this.RestoreFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRestoreFileOperationCompleted);
+            }
+            this.InvokeAsync("RestoreFile", new object[] {
+                        fileID}, this.RestoreFileOperationCompleted, userState);
+        }
+        
+        private void OnRestoreFileOperationCompleted(object arg) {
+            if ((this.RestoreFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RestoreFileCompleted(this, new RestoreFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -1141,6 +1175,32 @@ namespace WebClient.TermSVC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void RestoreFileCompletedEventHandler(object sender, RestoreFileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RestoreFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RestoreFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }
