@@ -189,7 +189,7 @@ namespace TermService
         }
 
         [WebMethod]
-        public int DeleteStorate(string accEmail)
+        public int DeleteStorage(string accEmail)
         {
             int accoID = GetAccountIDViaEmail(accEmail);
             List<Param> l = new List<Param>();
@@ -207,11 +207,14 @@ namespace TermService
             int success = LoginDB.ExecuteNonQuery("IncreaseStorageCapacity", l);
             return success;
         }
-        
+
         [WebMethod] 
-        public DataSet GetInactiveFiles(int fileID)
+        public DataSet GetInactiveFiles(string email)
         {
-            return LoginDB.GetInactiveFiles(fileID);
+            int accoID = GetAccountIDViaEmail(email);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            return LoginDB.GetInactiveFiles(accoID);
         }
     }
 }

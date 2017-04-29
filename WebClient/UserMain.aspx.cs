@@ -100,7 +100,10 @@ namespace WebClient
                     int fileDataID = 17;
                     int fileID = 33;
 
-                    object[] objArray = new object[7];
+                    string fileExtension = fileName.Substring(fileName.LastIndexOf("."));
+                    fileExtension = fileExtension.ToLower();
+
+                    object[] objArray = new object[8];
                     objArray[0] = fileDataID;
                     objArray[1] = fileID;
                     objArray[2] = fileName;
@@ -108,6 +111,7 @@ namespace WebClient
                     objArray[4] = fileSize;
                     objArray[5] = DateTime.Now;
                     objArray[6] = true;
+                    objArray[7] = fileExtension;
 
                     int x = pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
                     Response.Write(x);
