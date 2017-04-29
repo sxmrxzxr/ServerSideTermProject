@@ -152,10 +152,14 @@ namespace WebClient
                 if (CBox.Checked)
                 {
                     object[] objArray = new object[10];
+                    objArray[3] = DateTime.Now;
+                    objArray[6] = false;
+                    fileName = gvDelete.Rows[row].Cells[2].Text;
+                    fileType = gvDelete.Rows[row].Cells[3].Text;
                     byte[] fileData = pxy.DownloadFile(Convert.ToInt32(gvDelete.Rows[row].Cells[1].Text), (string)Session["UserEmail"], objArray);
                     Response.Clear();
                     //Response.ContentType = fileType;
-                    //Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName);
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName + ";");
                     Response.BinaryWrite(fileData.ToArray());
                     Response.Flush();
                     Response.Close();
