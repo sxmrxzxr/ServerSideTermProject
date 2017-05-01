@@ -38,9 +38,9 @@ namespace TermService
         public string CreateNewAccount(object[] data, bool rememberMe, string verify)
         {
             // 0 == failure
-            int success = LoginDB.ExecuteQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
+            int success = LoginDB.ExecuteNonQuery("NewTermAccount", LoginDB.BuildNewAccountParams(data)); 
 
-            if (success == 1)
+            if (success > 1)
             {
                 if (rememberMe)
                 {
@@ -165,6 +165,21 @@ namespace TermService
             List<Param> l = new List<Param>();
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));
             return LoginDB.ExecuteNonQuery("DeleteAccount", l);
+        }
+
+
+        [WebMethod]
+        public int DeactivateAccount(string useremail, string adminemail)
+        {
+            int accoID = GetAccountIDViaEmail(useremail);
+            int adminID = GetAccountIDViaEmail(adminemail);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int success= LoginDB.ExecuteNonQuery("DeactivateAccount", l);
+            l.Add(new Param("AdminID", adminID, SqlDbType.Int));
+            l.Add(new Param("ActivityType", "Deactivated Account", SqlDbType.VarChar));
+            int yep = LoginDB.ExecuteNonQuery("NewAdminActivity", l);
+            return success;
         }
 
         [WebMethod]

@@ -23,7 +23,6 @@ namespace TermLibrary
             p.Add(new Param("FirstName", param[1], SqlDbType.VarChar));
             p.Add(new Param("Email", param[2], SqlDbType.VarChar));
             p.Add(new Param("Passwd", param[3], SqlDbType.VarChar));
-            p.Add(new Param("IsAdmin", Convert.ToBoolean(param[4]), SqlDbType.Bit));
             return p;
         }
 
@@ -168,7 +167,9 @@ namespace TermLibrary
 
         public static DataSet GetAllAccounts()
         {
-            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID");
+            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd " 
+                                    + "FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID " 
+                                    + "WHERE TermAccount.IsActive = 1;");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
