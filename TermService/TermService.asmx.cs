@@ -191,6 +191,11 @@ namespace TermService
             return level;
         }
 
+        [WebMethod]
+        public DataSet GetAdminActivity()
+        {
+            return LoginDB.GetAdminActivity();
+        }
 
         [WebMethod]
         public int DeactivateAccount(string useremail, string adminemail)

@@ -169,7 +169,7 @@ namespace TermLibrary
         {
             return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd " 
                                     + "FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID " 
-                                    + "WHERE TermAccount.IsActive = 1;");
+                                    + "WHERE TermAccount.IsActive = 1 AND AdminLevel = 0;");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
@@ -199,6 +199,11 @@ namespace TermLibrary
                 return 0;
             }        
             
+        }
+
+        public static DataSet GetAdminActivity()
+        {
+            return objdb.GetDataSet("SELECT * FROM AdminActivity");
         }
 
         public static DataSet GetInactiveFiles(int accoID)

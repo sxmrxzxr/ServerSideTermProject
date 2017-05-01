@@ -173,7 +173,7 @@ namespace WebClient
                 if (CBox.Checked)
                 {
                     string email = gvAdminDelete.Rows[row].Cells[1].Text;
-                    pxy.DeleteAccountWithEmail(email);
+                    pxy.DeleteAccountWithEmail(email, (string)Session["Email"]);
                 }
 
             }
@@ -193,7 +193,7 @@ namespace WebClient
                     string email = gvAdminDelete.Rows[row].Cells[1].Text;
                     int capacity = Convert.ToInt32(txtStorageCapacity.Text);
                     string password = txtPassword2.Text;
-                    pxy.AdminUpdateAccountInfo(email, capacity, password);
+                    //pxy.AdminUpdateAccountInfo(email, capacity, password);
                 }
 
             }
