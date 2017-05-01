@@ -123,14 +123,21 @@ namespace TermService
         }
 
         [WebMethod]
-        public int AdminUpdateAccountInfo(string email, int capacity, string password)
+        public int AdminUpdateAccountInfo(string email, int capacity, string password, string adminemail)
         {
             int accoID = GetAccountIDViaEmail(email);
+            int adminID = GetAccountIDViaEmail(adminemail);
             List<Param> p = new List<Param>();
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
             p.Add(new Param("Capacity", capacity, SqlDbType.Int));
             p.Add(new Param("Passwd", password, SqlDbType.VarChar));
-            return LoginDB.ExecuteNonQuery("AdminUpdateAccount", p);
+            int x = LoginDB.ExecuteNonQuery("AdminUpdateAccount", p);
+            p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("AdminID", adminID, SqlDbType.Int));
+            p.Add(new Param("ActivityType", "Updated Account", SqlDbType.VarChar));
+            int yep = LoginDB.ExecuteNonQuery("NewAdminActivity", p);
+            return x;
         }
 
         [WebMethod]
@@ -159,12 +166,29 @@ namespace TermService
         }
 
         [WebMethod]
-        public int DeleteAccountWithEmail(string email)
+        public int DeleteAccountWithEmail(string email, string adminemail)
+        {
+            int accoID = GetAccountIDViaEmail(email);
+            int adminID = GetAccountIDViaEmail(adminemail);
+            List<Param> l = new List<Param>();
+            l.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            int x = LoginDB.ExecuteNonQuery("DeleteAccount", l);
+            List<Param> p = new List<Param>();
+            p.Add(new Param("AccountID", accoID, SqlDbType.Int));
+            p.Add(new Param("AdminID", adminID, SqlDbType.Int));
+            p.Add(new Param("ActivityType", "Deleted Account", SqlDbType.VarChar));
+            int yep = LoginDB.ExecuteNonQuery("NewAdminActivity", p);
+            return x;
+        }
+
+        [WebMethod]
+        public int GetAccountLevel(string email)
         {
             int accoID = GetAccountIDViaEmail(email);
             List<Param> l = new List<Param>();
             l.Add(new Param("AccountID", accoID, SqlDbType.Int));
-            return LoginDB.ExecuteNonQuery("DeleteAccount", l);
+            int level = LoginDB.ExecuteQuery("GetAccountLevel", l);
+            return level;
         }
 
 
