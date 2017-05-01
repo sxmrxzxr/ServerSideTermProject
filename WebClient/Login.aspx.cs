@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -57,9 +57,19 @@ namespace WebClient
                 myCookie.Expires = new DateTime(2017, 7, 1);
                 myCookie.Values["Email"] = txtEmail.Text;
                 Response.Cookies.Add(myCookie);
+
                 Session["LoginCheck"] = 1;
                 Session["UserEmail"] = txtEmail.Text;
-                Response.Redirect("UserMain.aspx");
+                int userLevel = pxy.GetAccountLevel(txtEmail.Text);
+                Session["UserLevel"] = userLevel;
+                if (userLevel == 0)
+                {
+                    Response.Redirect("UserMain.aspx");
+                }
+                else
+                {
+                    Response.Redirect("AdminMain.aspx");
+                }
             }
         }
     }
