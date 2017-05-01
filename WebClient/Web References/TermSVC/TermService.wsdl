@@ -240,24 +240,39 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="DeleteStorate">
+      <s:element name="DeleteStorage">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="accEmail" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="DeleteStorateResponse">
+      <s:element name="DeleteStorageResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="DeleteStorateResult" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteStorageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncreaseStorageSize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IncreaseStorageSizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IncreaseStorageSizeResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="GetInactiveFiles">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="fileID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -272,6 +287,20 @@
                 </s:sequence>
               </s:complexType>
             </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RestoreFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fileID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RestoreFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RestoreFileResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -361,17 +390,29 @@
   <wsdl:message name="DownloadFileSoapOut">
     <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
   </wsdl:message>
-  <wsdl:message name="DeleteStorateSoapIn">
-    <wsdl:part name="parameters" element="tns:DeleteStorate" />
+  <wsdl:message name="DeleteStorageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStorage" />
   </wsdl:message>
-  <wsdl:message name="DeleteStorateSoapOut">
-    <wsdl:part name="parameters" element="tns:DeleteStorateResponse" />
+  <wsdl:message name="DeleteStorageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStorageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IncreaseStorageSizeSoapIn">
+    <wsdl:part name="parameters" element="tns:IncreaseStorageSize" />
+  </wsdl:message>
+  <wsdl:message name="IncreaseStorageSizeSoapOut">
+    <wsdl:part name="parameters" element="tns:IncreaseStorageSizeResponse" />
   </wsdl:message>
   <wsdl:message name="GetInactiveFilesSoapIn">
     <wsdl:part name="parameters" element="tns:GetInactiveFiles" />
   </wsdl:message>
   <wsdl:message name="GetInactiveFilesSoapOut">
     <wsdl:part name="parameters" element="tns:GetInactiveFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="RestoreFileSoapIn">
+    <wsdl:part name="parameters" element="tns:RestoreFile" />
+  </wsdl:message>
+  <wsdl:message name="RestoreFileSoapOut">
+    <wsdl:part name="parameters" element="tns:RestoreFileResponse" />
   </wsdl:message>
   <wsdl:portType name="TermServiceSoap">
     <wsdl:operation name="HelloWorld">
@@ -430,13 +471,21 @@
       <wsdl:input message="tns:DownloadFileSoapIn" />
       <wsdl:output message="tns:DownloadFileSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteStorate">
-      <wsdl:input message="tns:DeleteStorateSoapIn" />
-      <wsdl:output message="tns:DeleteStorateSoapOut" />
+    <wsdl:operation name="DeleteStorage">
+      <wsdl:input message="tns:DeleteStorageSoapIn" />
+      <wsdl:output message="tns:DeleteStorageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <wsdl:input message="tns:IncreaseStorageSizeSoapIn" />
+      <wsdl:output message="tns:IncreaseStorageSizeSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetInactiveFiles">
       <wsdl:input message="tns:GetInactiveFilesSoapIn" />
       <wsdl:output message="tns:GetInactiveFilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreFile">
+      <wsdl:input message="tns:RestoreFileSoapIn" />
+      <wsdl:output message="tns:RestoreFileSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TermServiceSoap" type="tns:TermServiceSoap">
@@ -567,8 +616,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteStorate">
-      <soap:operation soapAction="http://tempuri.org/DeleteStorate" style="document" />
+    <wsdl:operation name="DeleteStorage">
+      <soap:operation soapAction="http://tempuri.org/DeleteStorage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <soap:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -578,6 +636,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInactiveFiles">
       <soap:operation soapAction="http://tempuri.org/GetInactiveFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreFile">
+      <soap:operation soapAction="http://tempuri.org/RestoreFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -714,8 +781,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteStorate">
-      <soap12:operation soapAction="http://tempuri.org/DeleteStorate" style="document" />
+    <wsdl:operation name="DeleteStorage">
+      <soap12:operation soapAction="http://tempuri.org/DeleteStorage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncreaseStorageSize">
+      <soap12:operation soapAction="http://tempuri.org/IncreaseStorageSize" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -725,6 +801,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInactiveFiles">
       <soap12:operation soapAction="http://tempuri.org/GetInactiveFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreFile">
+      <soap12:operation soapAction="http://tempuri.org/RestoreFile" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

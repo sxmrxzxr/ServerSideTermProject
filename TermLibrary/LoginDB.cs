@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Utilities;
 using System.Data;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace TermLibrary
 {
@@ -21,7 +23,6 @@ namespace TermLibrary
             p.Add(new Param("FirstName", param[1], SqlDbType.VarChar));
             p.Add(new Param("Email", param[2], SqlDbType.VarChar));
             p.Add(new Param("Passwd", param[3], SqlDbType.VarChar));
-            p.Add(new Param("IsAdmin", Convert.ToBoolean(param[4]), SqlDbType.Bit));
             return p;
         }
 
@@ -63,7 +64,7 @@ namespace TermLibrary
             List<Param> p = new List<Param>();
             p.Add(new Param("TransactionDateTime", param[3], SqlDbType.DateTime));
 
-            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(true) }, SqlDbType.Binary));
+            p.Add(new Param("UploadDownload", new byte[1] { Convert.ToByte(param[6]) }, SqlDbType.Binary));
 
             p.Add(new Param("FileID", fileID, SqlDbType.Int));
             p.Add(new Param("AccountID", accoID, SqlDbType.Int));
@@ -166,7 +167,9 @@ namespace TermLibrary
 
         public static DataSet GetAllAccounts()
         {
-            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID");
+            return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd " 
+                                    + "FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID " 
+                                    + "WHERE TermAccount.IsActive = 1;");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
@@ -236,13 +239,22 @@ namespace TermLibrary
             objcmd.CommandType = CommandType.StoredProcedure;
             objcmd.CommandText = "GetFileContentWithFileID";
 
-            SqlParameter inputParam = new SqlParameter("AccountID", id);
+            SqlParameter inputParam = new SqlParameter("FileID", id);
             inputParam.Direction = ParameterDirection.Input;
             inputParam.SqlDbType = SqlDbType.Int;
             objcmd.Parameters.Add(inputParam);
 
             DataSet data = objdb.GetDataSetUsingCmdObj(objcmd);
-            return new byte[1] { Convert.ToByte(data.Tables[0].Rows[0][0]) };
+
+            byte[] binaryDataResult = null;
+            using (MemoryStream memStream = new MemoryStream())
+            {
+                BinaryFormatter brFormatter = new BinaryFormatter();
+                data.RemotingFormat = SerializationFormat.Binary;
+                brFormatter.Serialize(memStream, data.Tables[0].Rows[0][0]);
+                binaryDataResult = memStream.ToArray();
+            }
+            return binaryDataResult;
         }
     }
 }
