@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="AdminMain.aspx" />
     <Content Include="AdminRegister.aspx" />
+    <Content Include="Clock.ascx" />
     <Content Include="Login.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="packages.config" />
@@ -142,6 +143,13 @@
     </Compile>
     <Compile Include="AdminRegister.aspx.designer.cs">
       <DependentUpon>AdminRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clock.ascx.cs">
+      <DependentUpon>Clock.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clock.ascx.designer.cs">
+      <DependentUpon>Clock.ascx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

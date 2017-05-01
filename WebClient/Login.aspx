@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebClient.Login" %>
 
+<%@ Register Src="~/Clock.ascx" TagPrefix="uc1" TagName="Clock" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,6 +23,7 @@
     <div>
     
     </div>
+        <uc1:Clock runat="server" id="Clock" />
         <asp:Label ID="lblLogin" runat="server" Font-Size="X-Large" Font-Underline="True" style="z-index: 1; left: 507px; top: 64px; position: absolute" Text="Login"></asp:Label>
         <asp:TextBox ID="txtEmail" runat="server" style="z-index: 1; left: 451px; top: 111px; position: absolute; width: 175px" placeholder="Email:" class="form-control"></asp:TextBox>
         <asp:TextBox ID="txtPassword" runat="server" style="z-index: 1; left: 451px; top: 154px; position: absolute; width: 175px" placeholder="Password:" TextMode="Password" class="form-control"></asp:TextBox>
