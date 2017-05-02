@@ -47,6 +47,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <asp:Button ID="btnReturn" runat="server" Style="width: 160px; background: #0080af" Text="Submit Question" class="btn btn-success" OnClick="btnReturn_Click" />
+                </div>
+            </div>
     </form>
 </body>
 </html>
