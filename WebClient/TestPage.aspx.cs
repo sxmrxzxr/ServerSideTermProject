@@ -173,7 +173,6 @@ namespace WebClient
                 if (CBox.Checked)
                 {
                     string email = gvAdminDelete.Rows[row].Cells[1].Text;
-                    //pxy.DeleteAccountWithEmail(email);
                 }
 
             }

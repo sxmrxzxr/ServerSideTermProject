@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminMain.aspx" />
+    <Content Include="AdminPortal.aspx" />
     <Content Include="AdminRegister.aspx" />
     <Content Include="Clock.ascx" />
     <Content Include="Forum.ascx" />
@@ -112,10 +113,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="UserRestore.aspx" />
-    <None Include="Web References\TermSVC\Reference.map">
+    <Content Include="Web References\TermSVC\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    </Content>
     <None Include="Web References\TermSVC\TermService.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -138,6 +139,13 @@
     </Compile>
     <Compile Include="AdminMain.aspx.designer.cs">
       <DependentUpon>AdminMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPortal.aspx.cs">
+      <DependentUpon>AdminPortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPortal.aspx.designer.cs">
+      <DependentUpon>AdminPortal.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminRegister.aspx.cs">
       <DependentUpon>AdminRegister.aspx</DependentUpon>

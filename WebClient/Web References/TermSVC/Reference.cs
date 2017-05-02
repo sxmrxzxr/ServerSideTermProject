@@ -55,6 +55,8 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback GetAccountLevelOperationCompleted;
         
+
+        private System.Threading.SendOrPostCallback GetAdminActivityOperationCompleted;
         private System.Threading.SendOrPostCallback DeactivateAccountOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAllAccountsOperationCompleted;
@@ -146,6 +148,11 @@ namespace WebClient.TermSVC {
         public event GetAccountLevelCompletedEventHandler GetAccountLevelCompleted;
         
         /// <remarks/>
+
+        public event GetAdminActivityCompletedEventHandler GetAdminActivityCompleted;
+        
+        /// <remarks/>
+
         public event DeactivateAccountCompletedEventHandler DeactivateAccountCompleted;
         
         /// <remarks/>
@@ -554,6 +561,35 @@ namespace WebClient.TermSVC {
         }
         
         /// <remarks/>
+
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAdminActivity", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetAdminActivity() {
+            object[] results = this.Invoke("GetAdminActivity", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAdminActivityAsync() {
+            this.GetAdminActivityAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAdminActivityAsync(object userState) {
+            if ((this.GetAdminActivityOperationCompleted == null)) {
+                this.GetAdminActivityOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAdminActivityOperationCompleted);
+            }
+            this.InvokeAsync("GetAdminActivity", new object[0], this.GetAdminActivityOperationCompleted, userState);
+        }
+        
+        private void OnGetAdminActivityOperationCompleted(object arg) {
+            if ((this.GetAdminActivityCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAdminActivityCompleted(this, new GetAdminActivityCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeactivateAccount", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public int DeactivateAccount(string useremail, string adminemail) {
             object[] results = this.Invoke("DeactivateAccount", new object[] {
@@ -1125,6 +1161,34 @@ namespace WebClient.TermSVC {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+
+    public delegate void GetAdminActivityCompletedEventHandler(object sender, GetAdminActivityCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAdminActivityCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAdminActivityCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+
     public delegate void DeactivateAccountCompletedEventHandler(object sender, DeactivateAccountCompletedEventArgs e);
     
     /// <remarks/>
