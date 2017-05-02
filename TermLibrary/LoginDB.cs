@@ -169,7 +169,7 @@ namespace TermLibrary
         {
             return objdb.GetDataSet("SELECT TermAccount.Email, TermStorage.Capacity, TermAccount.Passwd " 
                                     + "FROM TermAccount INNER JOIN TermStorage ON TermAccount.AccountID = TermStorage.AccountID " 
-                                    + "WHERE TermAccount.IsActive = 1 AND AdminLevel = 0;");
+                                    + "WHERE TermAccount.IsActive = 1 AND TermAccount.AdminLevel = 0;");
         }
 
         public static int ExecuteQuery(string procedure, List<Param> paramList)
