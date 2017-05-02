@@ -76,49 +76,13 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Button btnReturnToLogin0;
         
         /// <summary>
-        /// lblDeleteAccount control.
+        /// btnSuperAdminDashboard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeleteAccount;
-        
-        /// <summary>
-        /// lblUpdateAccount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUpdateAccount;
-        
-        /// <summary>
-        /// lblDeactivateAccount1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeactivateAccount1;
-        
-        /// <summary>
-        /// lblViewUsersFiles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblViewUsersFiles;
-        
-        /// <summary>
-        /// btnDeleteSelectedAccounts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteSelectedAccounts;
+        protected global::System.Web.UI.WebControls.Button btnSuperAdminDashboard;
         
         /// <summary>
         /// lblSetNewValuesForSelectedAccount control.
@@ -128,6 +92,15 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSetNewValuesForSelectedAccount;
+        
+        /// <summary>
+        /// btnLogOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogOut;
         
         /// <summary>
         /// txtStorageCapacity control.
@@ -175,13 +148,13 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Button btnDeactivateAccounts;
         
         /// <summary>
-        /// btnUpdateAccount0 control.
+        /// btnDeleteSelectedAccounts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateAccount0;
+        protected global::System.Web.UI.WebControls.Button btnDeleteSelectedAccounts;
         
         /// <summary>
         /// btnViewSelectedUsersFiles control.
@@ -200,5 +173,50 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDelete;
+        
+        /// <summary>
+        /// lblViewAccountFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblViewAccountFiles;
+        
+        /// <summary>
+        /// lblDeleteAnAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeleteAnAccount;
+        
+        /// <summary>
+        /// lblDeactivateanAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeactivateanAccount;
+        
+        /// <summary>
+        /// lblUpdateAnAccount0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUpdateAnAccount0;
+        
+        /// <summary>
+        /// btnUpdateAccount1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateAccount1;
     }
 }

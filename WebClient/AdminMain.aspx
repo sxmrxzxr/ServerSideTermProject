@@ -21,7 +21,7 @@
     
     </div>
         <asp:Label ID="lblWelcomeAdmin" runat="server" Font-Size="X-Large" Font-Underline="True" style="z-index: 1; left: 499px; top: 44px; position: absolute" Text="Welcome Admin!"></asp:Label>
-        <asp:Button ID="btnTechSupport" runat="server" style="z-index: 1; left: 73px; top: 67px; position: absolute" Text="Tech Support" class="btn btn-default" OnClick="btnTechSupport_Click"/>
+        <asp:Button ID="btnTechSupport" runat="server" style="z-index: 1; left: 892px; top: 42px; position: absolute" Text="Tech Support" class="btn btn-default" OnClick="btnTechSupport_Click"/>
         <p>
             <asp:Button ID="btnRegisterNewAdmin" runat="server" OnClick="btnRegisterNewAdmin_Click" style="z-index: 1; left: 501px; top: 102px; position: absolute; width: 158px" Text="Register New Admin" class="btn btn-default" Visible="False"/>
         </p>
@@ -39,25 +39,20 @@
         </asp:GridView>
         <asp:Label ID="lblCloudUserAccounts" runat="server" Font-Bold="True" Font-Underline="True" style="z-index: 1; left: 100px; top: 192px; position: absolute" Text="Cloud User Accounts"></asp:Label>
         <p>
-        <asp:Button ID="btnReturnToLogin0" runat="server" OnClick="btnReturnToLogin_Click" style="z-index: 1; left: 72px; top: 20px; position: absolute" Text="Return to Login" class="btn btn-default"/>
+        <asp:Button ID="btnReturnToLogin0" runat="server" OnClick="btnReturnToLogin_Click" style="z-index: 1; left: 710px; top: 41px; position: absolute" Text="Return to Login" class="btn btn-default"/>
         </p>
-        <p>
-        <asp:Label ID="lblDeleteAccount" runat="server" Font-Underline="True" style="z-index: 1; left: 586px; top: 213px; position: absolute; width: 290px; font-size: 150%; background-color: coral; height: 30px;" Font-Bold="True" class="label label-primary" Font-Size="Medium">Delete an Account</asp:Label>
-        <asp:Label ID="lblUpdateAccount" runat="server" Font-Underline="True" style="z-index: 1; left: 588px; top: 353px; position: absolute; width: 290px; font-size: 150%; background-color: coral; height: 30px;" Font-Bold="True" class="label label-primary" Font-Size="Medium">Update Account</asp:Label>
-        <asp:Label ID="lblDeactivateAccount1" runat="server" Font-Underline="True" style="z-index: 1; left: 587px; top: 611px; position: absolute; width: 290px; font-size: 150%; background-color: coral; height: 30px;" Font-Bold="True" class="label label-primary" Font-Size="Medium">Deactivate Account</asp:Label>
-        <asp:Label ID="lblViewUsersFiles" runat="server" Font-Underline="True" style="z-index: 1; left: 585px; top: 757px; position: absolute; width: 290px; font-size: 150%; background-color: coral; height: 30px;" Font-Bold="True" class="label label-primary" Font-Size="Medium">View User&#39;s Files</asp:Label>
-            <asp:Button ID="btnDeleteSelectedAccounts" runat="server" style="z-index: 1; left: 647px; top: 284px; position: absolute; width: 191px" Text="Delete Selected Account(s)" OnClick="btnDeleteSelectedAccounts_Click" class="btn btn-default"/>
-        </p>
+        <asp:Button ID="btnSuperAdminDashboard" runat="server" style="z-index: 1; left: 709px; top: 103px; position: absolute" Text="Super Admin Dashboard" class="btn btn-default" Visible="False"/>
         <asp:Label ID="lblSetNewValuesForSelectedAccount" runat="server" Font-Underline="True" style="z-index: 1; left: 638px; top: 413px; position: absolute" Text="Set New Values for Selected Account"></asp:Label>
+        <asp:Button ID="btnLogOut" runat="server" style="z-index: 1; left: 1057px; top: 41px; position: absolute" Text="Log Out" class="btn btn-default" OnClick="btnLogOut_Click"/>
         <p>
-        <asp:TextBox ID="txtStorageCapacity" runat="server" style="z-index: 1; left: 734px; top: 455px; position: absolute"></asp:TextBox>
-        <asp:TextBox ID="txtPassword2" runat="server" style="z-index: 1; left: 737px; top: 506px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblStorageCapacity" runat="server" style="z-index: 1; left: 609px; top: 455px; position: absolute" Text="Storage Capacity:"></asp:Label>
-        <asp:Label ID="lblPassword2" runat="server" style="z-index: 1; left: 656px; top: 507px; position: absolute" Text="Password:"></asp:Label>
-            <asp:Button ID="btnDeactivateAccounts" runat="server"  style="z-index: 1; left: 636px; top: 689px; position: absolute; width: 223px" Text="Deactivate Selected Account(s)" class="btn btn-default" OnClick="btnDeactivateAccounts_Click"/>
-            <asp:Button ID="btnUpdateAccount0" runat="server"  style="z-index: 1; left: 673px; top: 553px; position: absolute; width: 158px" Text="Update Account" OnClick="btnUpdateAccount_Click" class="btn btn-default"/>
-            <asp:Button ID="btnViewSelectedUsersFiles" runat="server"  style="z-index: 1; left: 643px; top: 825px; position: absolute; width: 223px" Text="View Selected User's Files" class="btn btn-default" OnClick="btnViewSelectedUsersFiles_Click"/>
-        <asp:GridView class="table table-bordered table-hover" ID="gvDelete" runat="server" AutoGenerateColumns="False" Style="z-index: 1; left: 944px; top: 613px; position: absolute; height: 175px; width: 642px; right: 4px">
+        <asp:TextBox ID="txtStorageCapacity" runat="server" style="z-index: 1; left: 721px; top: 442px; position: absolute"></asp:TextBox>
+        <asp:TextBox ID="txtPassword2" runat="server" style="z-index: 1; left: 720px; top: 473px; position: absolute; right: 455px;"></asp:TextBox>
+        <asp:Label ID="lblStorageCapacity" runat="server" style="z-index: 1; left: 601px; top: 441px; position: absolute" Text="Storage Capacity:"></asp:Label>
+        <asp:Label ID="lblPassword2" runat="server" style="z-index: 1; left: 649px; top: 474px; position: absolute" Text="Password:"></asp:Label>
+            <asp:Button ID="btnDeactivateAccounts" runat="server"  style="z-index: 1; left: 635px; top: 626px; position: absolute; width: 223px" Text="Deactivate Selected Account(s)" class="btn btn-default" OnClick="btnDeactivateAccounts_Click"/>
+            <asp:Button ID="btnDeleteSelectedAccounts" runat="server"  style="z-index: 1; left: 645px; top: 325px; position: absolute; width: 215px; right: 461px;" Text="Delete Selected Account(s)" OnClick="btnDeleteSelectedAccounts_Click" class="btn btn-default"/>
+            <asp:Button ID="btnViewSelectedUsersFiles" runat="server"  style="z-index: 1; left: 641px; top: 751px; position: absolute; width: 223px" Text="View Selected User's Files" class="btn btn-default" OnClick="btnViewSelectedUsersFiles_Click"/>
+        <asp:GridView class="table table-bordered table-hover" ID="gvDelete" runat="server" AutoGenerateColumns="False" Style="z-index: 1; left: 937px; top: 547px; position: absolute; height: 175px; width: 642px; right: -276px">
             <Columns>
                 <asp:BoundField HeaderText="FileID" DataField="FileID" />
                 <asp:BoundField HeaderText="File Name" DataField="Name" />
@@ -69,6 +64,13 @@
             </Columns>
         </asp:GridView>
         </p>
+        <asp:Label ID="lblViewAccountFiles" runat="server" Font-Bold="True" Font-Size="Large" Font-Underline="True" style="z-index: 1; left: 662px; top: 710px; position: absolute" Text="View Account Files"></asp:Label>
+        <p>
+            <asp:Label ID="lblDeleteAnAccount" runat="server" Font-Bold="True" Font-Size="Large" Font-Underline="True" style="z-index: 1; left: 671px; top: 289px; position: absolute" Text="Delete An Account"></asp:Label>
+            <asp:Label ID="lblDeactivateanAccount" runat="server" Font-Bold="True" Font-Size="Large" Font-Underline="True" style="z-index: 1; left: 646px; top: 584px; position: absolute" Text="Deactivate an Account"></asp:Label>
+            <asp:Label ID="lblUpdateAnAccount0" runat="server" Font-Bold="True" Font-Size="Large" Font-Underline="True" style="z-index: 1; left: 661px; top: 376px; position: absolute" Text="Update An Account"></asp:Label>
+            <asp:Button ID="btnUpdateAccount1" runat="server"  style="z-index: 1; left: 663px; top: 508px; position: absolute; width: 158px; right: 482px;" Text="Update Account" OnClick="btnUpdateAccount_Click" class="btn btn-default"/>
+            </p>
     </form>
 </body>
 </html>

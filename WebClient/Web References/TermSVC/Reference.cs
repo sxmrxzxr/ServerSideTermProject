@@ -53,6 +53,10 @@ namespace WebClient.TermSVC {
         
         private System.Threading.SendOrPostCallback DeleteAccountWithEmailOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetAccountLevelOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeactivateAccountOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetAllAccountsOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetFileDataOperationCompleted;
@@ -137,6 +141,12 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         public event DeleteAccountWithEmailCompletedEventHandler DeleteAccountWithEmailCompleted;
+        
+        /// <remarks/>
+        public event GetAccountLevelCompletedEventHandler GetAccountLevelCompleted;
+        
+        /// <remarks/>
+        public event DeactivateAccountCompletedEventHandler DeactivateAccountCompleted;
         
         /// <remarks/>
         public event GetAllAccountsCompletedEventHandler GetAllAccountsCompleted;
@@ -357,28 +367,30 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AdminUpdateAccountInfo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int AdminUpdateAccountInfo(string email, int capacity, string password) {
+        public int AdminUpdateAccountInfo(string email, int capacity, string password, string adminemail) {
             object[] results = this.Invoke("AdminUpdateAccountInfo", new object[] {
                         email,
                         capacity,
-                        password});
+                        password,
+                        adminemail});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password) {
-            this.AdminUpdateAccountInfoAsync(email, capacity, password, null);
+        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password, string adminemail) {
+            this.AdminUpdateAccountInfoAsync(email, capacity, password, adminemail, null);
         }
         
         /// <remarks/>
-        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password, object userState) {
+        public void AdminUpdateAccountInfoAsync(string email, int capacity, string password, string adminemail, object userState) {
             if ((this.AdminUpdateAccountInfoOperationCompleted == null)) {
                 this.AdminUpdateAccountInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAdminUpdateAccountInfoOperationCompleted);
             }
             this.InvokeAsync("AdminUpdateAccountInfo", new object[] {
                         email,
                         capacity,
-                        password}, this.AdminUpdateAccountInfoOperationCompleted, userState);
+                        password,
+                        adminemail}, this.AdminUpdateAccountInfoOperationCompleted, userState);
         }
         
         private void OnAdminUpdateAccountInfoOperationCompleted(object arg) {
@@ -483,30 +495,92 @@ namespace WebClient.TermSVC {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeleteAccountWithEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int DeleteAccountWithEmail(string email) {
+        public int DeleteAccountWithEmail(string email, string adminemail) {
             object[] results = this.Invoke("DeleteAccountWithEmail", new object[] {
-                        email});
+                        email,
+                        adminemail});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void DeleteAccountWithEmailAsync(string email) {
-            this.DeleteAccountWithEmailAsync(email, null);
+        public void DeleteAccountWithEmailAsync(string email, string adminemail) {
+            this.DeleteAccountWithEmailAsync(email, adminemail, null);
         }
         
         /// <remarks/>
-        public void DeleteAccountWithEmailAsync(string email, object userState) {
+        public void DeleteAccountWithEmailAsync(string email, string adminemail, object userState) {
             if ((this.DeleteAccountWithEmailOperationCompleted == null)) {
                 this.DeleteAccountWithEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteAccountWithEmailOperationCompleted);
             }
             this.InvokeAsync("DeleteAccountWithEmail", new object[] {
-                        email}, this.DeleteAccountWithEmailOperationCompleted, userState);
+                        email,
+                        adminemail}, this.DeleteAccountWithEmailOperationCompleted, userState);
         }
         
         private void OnDeleteAccountWithEmailOperationCompleted(object arg) {
             if ((this.DeleteAccountWithEmailCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.DeleteAccountWithEmailCompleted(this, new DeleteAccountWithEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAccountLevel", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int GetAccountLevel(string email) {
+            object[] results = this.Invoke("GetAccountLevel", new object[] {
+                        email});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAccountLevelAsync(string email) {
+            this.GetAccountLevelAsync(email, null);
+        }
+        
+        /// <remarks/>
+        public void GetAccountLevelAsync(string email, object userState) {
+            if ((this.GetAccountLevelOperationCompleted == null)) {
+                this.GetAccountLevelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAccountLevelOperationCompleted);
+            }
+            this.InvokeAsync("GetAccountLevel", new object[] {
+                        email}, this.GetAccountLevelOperationCompleted, userState);
+        }
+        
+        private void OnGetAccountLevelOperationCompleted(object arg) {
+            if ((this.GetAccountLevelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAccountLevelCompleted(this, new GetAccountLevelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeactivateAccount", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int DeactivateAccount(string useremail, string adminemail) {
+            object[] results = this.Invoke("DeactivateAccount", new object[] {
+                        useremail,
+                        adminemail});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeactivateAccountAsync(string useremail, string adminemail) {
+            this.DeactivateAccountAsync(useremail, adminemail, null);
+        }
+        
+        /// <remarks/>
+        public void DeactivateAccountAsync(string useremail, string adminemail, object userState) {
+            if ((this.DeactivateAccountOperationCompleted == null)) {
+                this.DeactivateAccountOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeactivateAccountOperationCompleted);
+            }
+            this.InvokeAsync("DeactivateAccount", new object[] {
+                        useremail,
+                        adminemail}, this.DeactivateAccountOperationCompleted, userState);
+        }
+        
+        private void OnDeactivateAccountOperationCompleted(object arg) {
+            if ((this.DeactivateAccountCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeactivateAccountCompleted(this, new DeactivateAccountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1010,6 +1084,58 @@ namespace WebClient.TermSVC {
         private object[] results;
         
         internal DeleteAccountWithEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetAccountLevelCompletedEventHandler(object sender, GetAccountLevelCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAccountLevelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAccountLevelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void DeactivateAccountCompletedEventHandler(object sender, DeactivateAccountCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeactivateAccountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeactivateAccountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

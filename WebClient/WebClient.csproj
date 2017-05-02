@@ -99,7 +99,9 @@
     <Content Include="AdminMain.aspx" />
     <Content Include="AdminRegister.aspx" />
     <Content Include="Clock.ascx" />
+    <Content Include="Forum.ascx" />
     <Content Include="Login.aspx" />
+    <Content Include="TechSupportForumAdmin.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -151,12 +153,26 @@
     <Compile Include="Clock.ascx.designer.cs">
       <DependentUpon>Clock.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forum.ascx.cs">
+      <DependentUpon>Forum.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forum.ascx.designer.cs">
+      <DependentUpon>Forum.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TechSupportForumAdmin.aspx.cs">
+      <DependentUpon>TechSupportForumAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TechSupportForumAdmin.aspx.designer.cs">
+      <DependentUpon>TechSupportForumAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestPage.aspx.cs">
       <DependentUpon>TestPage.aspx</DependentUpon>
