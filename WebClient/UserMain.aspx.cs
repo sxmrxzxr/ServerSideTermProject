@@ -129,7 +129,7 @@ namespace WebClient
                     objArray[7] = fileExtension;
 
                     int x = pxy.UpdateFile(objArray, fileData, (string)Session["UserEmail"], "BADTOKEN");
-                    Response.Write(x);
+                    
                 }
             }
             catch (Exception ex)
@@ -175,6 +175,22 @@ namespace WebClient
             int numdeleted = pxy.DeleteStorage((string)Session["UserEmail"]);
             gvDelete.DataSource = pxy.GetFileData((string)Session["UserEmail"]);
             gvDelete.DataBind();
+        }
+
+        protected void btnRestoreFiles_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserRestore.aspx");
+        }
+
+        protected void btnTechSupportForum_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TechSupportForum.aspx");
+        }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("Login.aspx");
         }
     }
 

@@ -202,6 +202,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+
       <s:element name="GetAdminActivity">
         <s:complexType />
       </s:element>
@@ -219,6 +220,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+
       <s:element name="DeactivateAccount">
         <s:complexType>
           <s:sequence>
@@ -426,12 +428,14 @@
   <wsdl:message name="GetAccountLevelSoapOut">
     <wsdl:part name="parameters" element="tns:GetAccountLevelResponse" />
   </wsdl:message>
+
   <wsdl:message name="GetAdminActivitySoapIn">
     <wsdl:part name="parameters" element="tns:GetAdminActivity" />
   </wsdl:message>
   <wsdl:message name="GetAdminActivitySoapOut">
     <wsdl:part name="parameters" element="tns:GetAdminActivityResponse" />
   </wsdl:message>
+
   <wsdl:message name="DeactivateAccountSoapIn">
     <wsdl:part name="parameters" element="tns:DeactivateAccount" />
   </wsdl:message>
@@ -529,10 +533,12 @@
       <wsdl:input message="tns:GetAccountLevelSoapIn" />
       <wsdl:output message="tns:GetAccountLevelSoapOut" />
     </wsdl:operation>
+
     <wsdl:operation name="GetAdminActivity">
       <wsdl:input message="tns:GetAdminActivitySoapIn" />
       <wsdl:output message="tns:GetAdminActivitySoapOut" />
     </wsdl:operation>
+
     <wsdl:operation name="DeactivateAccount">
       <wsdl:input message="tns:DeactivateAccountSoapIn" />
       <wsdl:output message="tns:DeactivateAccountSoapOut" />
@@ -676,6 +682,7 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+
     <wsdl:operation name="GetAdminActivity">
       <soap:operation soapAction="http://tempuri.org/GetAdminActivity" style="document" />
       <wsdl:input>
@@ -685,6 +692,7 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+
     <wsdl:operation name="DeactivateAccount">
       <soap:operation soapAction="http://tempuri.org/DeactivateAccount" style="document" />
       <wsdl:input>
@@ -868,6 +876,7 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+
     <wsdl:operation name="GetAdminActivity">
       <soap12:operation soapAction="http://tempuri.org/GetAdminActivity" style="document" />
       <wsdl:input>
@@ -877,6 +886,7 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+
     <wsdl:operation name="DeactivateAccount">
       <soap12:operation soapAction="http://tempuri.org/DeactivateAccount" style="document" />
       <wsdl:input>

@@ -20,6 +20,11 @@ namespace WebClient
             {
                 gvAdminDelete.DataSource = pxy.GetAllAccounts();
                 gvAdminDelete.DataBind();
+
+                if((int)Session["UserLevel"] == 2)
+                {
+                    btnSuperAdminDashboard.Visible = true;
+                }
             }
         }
 
@@ -113,6 +118,17 @@ namespace WebClient
         protected void btnTechSupport_Click(object sender, EventArgs e)
         {
             Response.Redirect("TechSupportForumAdmin.aspx");
+        }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void btnSuperAdminDashboard_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPortal.aspx");
         }
     }
 }
